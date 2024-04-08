@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Art Details</h1>
+
+<div class="row">
+    <div class="col s6 col-offset-3">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ art.title }}</span>
+                <p>Image: {{ art.image }}</p>
+                <p>Description: {{ art.description }}</p>
+                <!-- <p>Like(s): {{ art.like }}</p> -->
+                <p>Price: {{ art.price }}</p>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'arts_update' art.id %}">Edit</a>
+                <a href="{% url 'arts_delete' art.id %}">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
