@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.view.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 # from django.contrib.auth import login
 # from django.contrib.auth.forms import UserCreationForm
@@ -34,6 +34,52 @@ class ArtDelete(DeleteView):
     fields = '__all__'
 
 # Model 2: Style
+class StyletList(ListView):
+    model = Style
 
+class StyleDetail(DetailView):
+    model = Style
+
+class StyleUpdate(UpdateView):
+    model = Style
+    fields = '__all__'
+
+class StyleDelete(DeleteView):
+    model = Style
+    fields = '__all__'
+
+# Model 3: Medium
+class MediumList(ListView):
+    model = Medium
+
+class MediumDetail(DetailView):
+    model = Medium
+
+class MediumUpdate(UpdateView):
+    model = Medium
+    fields = '__all__'
+
+class MediumDelete(DeleteView):
+    model = Medium
+    fields = '__all__'
+
+# Model 4: Comment
+class CommentList(ListView):
+    model = Comment
+
+class CommentDetail(DetailView):
+    model = Comment
+
+class CommentCreate(CreateView):
+    model = Comment
+    fields = '__all__'
+
+class CommentUpdate(UpdateView):
+    model = Comment
+    fields = '__all__'
+
+class CommentDelete(DeleteView):
+    model = Comment
+    fields = '__all__'
 
 # let's go team
