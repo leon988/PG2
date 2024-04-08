@@ -34,7 +34,7 @@ class ArtDelete(DeleteView):
     fields = '__all__'
 
 # Model 2: Style
-class StyletList(ListView):
+class StyleList(ListView):
     model = Style
 
 class StyleDetail(DetailView):
