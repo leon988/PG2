@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from datetime import date
+from django.contrib.auth.models import User
 # Create your models here.
 
 MEDIUM = (
@@ -22,13 +23,13 @@ MEDIUM = (
 )
 
 STYLES = (
-    ('Impressionim'),
+    ('Impressionism'),
     ('Cubism'),
     ('Surrealism'),
     ('Realism'),
     ('Abstract'),
     ('Romanticism'),
-    ('Art Noveau'),
+    ('Art Nouveau'),
     ('Pop Art'),
     ('Post Modernism'),
     ('Minimalism'),
@@ -36,6 +37,7 @@ STYLES = (
     ('Thangka'),
     ('Others')
 )
+
 
 # Model 3: Medium
 class Medium(models.Model):
@@ -62,11 +64,13 @@ class Style(models.Model):
 class Art(models.Model):
     title = models.CharField(max_length=75)
     image = models.CharField(max_length=500)
-    description= models.TextField(max_length=750)
-    date= models.DateField('Art Creation Date')
-    price= models.DecimalField(max_digits=10000, decimal_places=2)
-    like= models.IntegerField(default=0)
-    style= models.ManyToManyField(Style)
+    description = models.TextField(max_length=750)
+    date = models.DateField('Art Creation Date')
+    price = models.DecimalField(max_digits=10000, decimal_places=2)
+    like = models.IntegerField(default=0)
+    style = models.ManyToManyField(Style)
+    medium = models.ManyToManyField(Medium)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.title} ({self.id})'
@@ -77,8 +81,19 @@ class Art(models.Model):
     def get_absolute_url(self):
         return reverse('artworks_detail', kwargs={'art_id': self.id})
     # user fk
-    # comment fk
-    # medium fk
+
+
+# Model 4: Comment
+class Comment(models.Model):
+    date = models.DateField()
+    comment = models.TextField(max_length=280)
+
+  # Create an art_id FK
+    art = models.ForeignKey(Art, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Comment by {self.user.username} on {self.date}'
+
 
     
 
