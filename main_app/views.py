@@ -31,7 +31,8 @@ class ArtUpdate(UpdateView):
 
 class ArtDelete(DeleteView):
     model = Art
-    fields = '__all__'
+    success_url= '/art'
+# FIXME: we need to update the xxxDeletes
 
 # Model 2: Style
 class StyleList(ListView):

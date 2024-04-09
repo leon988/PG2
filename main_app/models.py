@@ -76,9 +76,9 @@ class Art(models.Model):
     
     # def __str__(self):
     #     return f"{self.()} on {self.date}"
-    
+    # FIXME: this was artwork_detail, updated!
     def get_absolute_url(self):
-        return reverse('artworks_detail', kwargs={'art_id': self.id})
+        return reverse('arts_detail', kwargs={'art_id': self.id})
     # user fk
 
 
