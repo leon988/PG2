@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Style List</h1>
+
+{% for style in object_list %}
+<a href="{% url 'styles_detail' style.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ style.name }}</span>
+        </div>
+    </div>
+</a>
+{% endfor %}
+
+{% endblock %}

@@ -18,6 +18,18 @@ MEDIUM = (
     ('SCU', 'Sculpture'),
     ('MIX', 'Mixed Media'),
     ('COL', 'Collage'),
+    ('DRAW', 'Drawing'),
+    ('TXT', 'Textile Art'),
+    ('CER', 'Ceramics'),
+    ('PERM', 'Performance Art'),
+    ('INST', 'Installation Art'),
+    ('GLASS', 'Glass Art'),
+    ('MTL', 'Metal Work'),
+    ('LEET', 'Leather Work'),
+    ('PEP', 'Paper Art / Origami'),
+    ('MOS', 'Mosaic'),
+    ('BOD', 'Body Art / Tattoo'),
+    ('SND', 'Sound Art / Music'),
     ('OTH', 'Others')
 )
 
