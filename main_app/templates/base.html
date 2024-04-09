@@ -24,10 +24,21 @@
                 </ul>
                 <ul class="right">
                     <li><a href="{% url 'index' %}">View All Art</a></li>
-                    <li><a href="{% url 'arts_create' %}">Add Art</a></li>
-                    <li><a href="{% url 'styles_index' %}">View All Styles</a></li>
-                    <li><a href="{% url 'mediums_index' %}">View All Mediums</a></li>
                     <li><a href="{% url 'about' %}">About PG²</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'arts_create' %}">Add Art</a></li>
+                        <li><a href="{% url 'styles_index' %}">View All Styles</a></li>
+                        <li><a href="{% url 'mediums_index' %}">View All Mediums</a></li>
+                        <li>
+                            <form action="{% url 'logout' %}" method="POST">
+                                {%csrf_token%}
+                                <button type="submit" class="btn">Log Out</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                        <li><a href="{% url 'login' %}">Log In</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
