@@ -91,7 +91,6 @@ class Art(models.Model):
     # FIXME: this was artwork_detail, updated!
     def get_absolute_url(self):
         return reverse('arts_detail', kwargs={'art_id': self.id})
-    # user fk
 
 
 # Model 4: Comment

@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-# from django.contrib.auth import login
-# from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 # from django.contrib.auth.decorators import login_required
-# from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Art, Style, Medium, Comment
 
 # Create your views here.
@@ -21,31 +21,34 @@ class ArtList(ListView):
 class ArtDetail(DetailView):
     model = Art
 
-class ArtCreate(CreateView):
+class ArtCreate(LoginRequiredMixin, CreateView):
     model = Art
     fields =['title', 'image', 'description', 'price', 'style', 'medium']
 
-class ArtUpdate(UpdateView):
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class ArtUpdate(LoginRequiredMixin, UpdateView):
     model = Art
     fields = ['title', 'image', 'description', 'price', 'style', 'medium']
 
-class ArtDelete(DeleteView):
+class ArtDelete(LoginRequiredMixin, DeleteView):
     model = Art
     success_url= '/art'
-# FIXME: we need to update the xxxDeletes
 
 # Model 2: Style
 class StyleList(ListView):
     model = Style
 
-class StyleDetail(DetailView):
+class StyleDetail(LoginRequiredMixin, DetailView):
     model = Style
 
-class StyleUpdate(UpdateView):
+class StyleUpdate(LoginRequiredMixin, UpdateView):
     model = Style
     fields = '__all__'
 
-class StyleDelete(DeleteView):
+class StyleDelete(LoginRequiredMixin, DeleteView):
     model = Style
     success_url = '/style'
 
@@ -53,14 +56,14 @@ class StyleDelete(DeleteView):
 class MediumList(ListView):
     model = Medium
 
-class MediumDetail(DetailView):
+class MediumDetail(LoginRequiredMixin, DetailView):
     model = Medium
 
-class MediumUpdate(UpdateView):
+class MediumUpdate(LoginRequiredMixin, UpdateView):
     model = Medium
     fields = '__all__'
 
-class MediumDelete(DeleteView):
+class MediumDelete(LoginRequiredMixin, DeleteView):
     model = Medium
     success_url = '/medium'
 
@@ -71,16 +74,29 @@ class CommentList(ListView):
 class CommentDetail(DetailView):
     model = Comment
 
-class CommentCreate(CreateView):
+class CommentCreate(LoginRequiredMixin, CreateView):
     model = Comment
     fields = '__all__'
 
-class CommentUpdate(UpdateView):
+class CommentUpdate(LoginRequiredMixin, UpdateView):
     model = Comment
     fields = '__all__'
 
-class CommentDelete(DeleteView):
+class CommentDelete(LoginRequiredMixin, DeleteView):
     model = Comment
     success_url = '/comment'
 
-# let's go team
+# SIGNUP
+def signup(request):
+  error_message = ''
+  if request.method == 'POST':
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      user = form.save()
+      login(request, user)
+      return redirect('index')
+    else:
+      error_message = 'Invalid sign up - try again'
+  form = UserCreationForm()
+  context = {'form': form, 'error_message': error_message}
+  return render(request, 'registration/signup.html', context)

@@ -31,9 +31,8 @@ urlpatterns = [
   path('comment/<int:pk>/update/', views.CommentUpdate.as_view(), name='comments_update'),
   path('comment/<int:pk>/delete/', views.CommentDelete.as_view(), name='comments_delete'),
 
-
   # Model 5 - User
-
+  path('accounts/signup/', views.signup, name='signup'),
 
 
 # hi team!
