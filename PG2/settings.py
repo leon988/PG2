@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'PG2.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'PG2',
+        'NAME': 'pgtwo',
     }
 }
 
@@ -85,7 +85,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
-AUTH_USER_MODEL = 'main_app.Profile'
+# AUTH_USER_MODEL = 'main_app.Profile'
 
 AUTH_PASSWORD_VALIDATORS = [
     {

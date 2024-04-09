@@ -8,6 +8,11 @@ class UserForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'email')
 
 class ProfileForm(forms.ModelForm):
+    password = forms.CharField()
+    email = forms.EmailField()
+    username = forms.CharField()
+    first_name = forms.CharField()
+    last_name = forms.CharField()
     class Meta:
         model = Profile
         fields = ('profile_pic', 'bio', 'location')

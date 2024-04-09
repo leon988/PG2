@@ -3,12 +3,12 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Art, Style, Medium, Comment
-from django.db import transaction
+# from django.db import transaction
 from .forms import UserForm, ProfileForm
-from django.contrib import messages
+# from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -95,34 +95,45 @@ def signup(request):
   if request.method == 'POST':
     form = UserCreationForm(request.POST)
     if form.is_valid():
-      user = form.save()
-      login(request, user)
-      return redirect('index')
+        # profile_user = form.save(commit=False)
+        # profile.user = profile_user
+        user = form.save()
+        print(user)
+        login(request, user)
+        return redirect('index')
     else:
       error_message = 'Invalid sign up - try again'
   form = UserCreationForm()
+        
+#   form =ProfileForm():
+
+#         profile.save()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
 
-@login_required
-@transaction.atomic
-def update_profile(request):
-    user = request.user
-    if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=user)
-        profile_form = ProfileForm(request.POST, instance=user.profile)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            messages.success(request, ('Your profile was successfully updated!'))
-            return redirect('settings:profile')
-        else:
-            messages.error(request, ('Please correct the error below.'))
-    else:
-        user_form = UserForm(instance=user)
-        profile_form = ProfileForm(instance=user.profile)
-    return render(request, 'registration/profile.html', {
-        'user_form': user_form,
-        'profile_form': profile_form
-    })
+
+
+
+
+# @login_required
+# @transaction.atomic
+# def update_profile(request):
+#     user = request.user
+#     if request.method == 'POST':
+#         user_form = UserForm(request.POST, instance=user)
+#         profile_form = ProfileForm(request.POST, instance=user.profile)
+#         if user_form.is_valid() and profile_form.is_valid():
+#             user_form.save()
+#             profile_form.save()
+#             messages.success(request, ('Your profile was successfully updated!'))
+#             return redirect('settings:profile')
+#         else:
+#             messages.error(request, ('Please correct the error below.'))
+#     else:
+#         user_form = UserForm(instance=user)
+#         profile_form = ProfileForm(instance=user.profile)
+#     return render(request, 'registration/profile.html', {
+#         'user_form': user_form,
+#         'profile_form': profile_form
+#     })
