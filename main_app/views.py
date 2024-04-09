@@ -47,7 +47,7 @@ class StyleUpdate(UpdateView):
 
 class StyleDelete(DeleteView):
     model = Style
-    fields = '__all__'
+    success_url = '/style'
 
 # Model 3: Medium
 class MediumList(ListView):
@@ -62,7 +62,7 @@ class MediumUpdate(UpdateView):
 
 class MediumDelete(DeleteView):
     model = Medium
-    fields = '__all__'
+    success_url = '/medium'
 
 # Model 4: Comment
 class CommentList(ListView):
@@ -81,6 +81,6 @@ class CommentUpdate(UpdateView):
 
 class CommentDelete(DeleteView):
     model = Comment
-    fields = '__all__'
+    success_url = '/comment'
 
 # let's go team
