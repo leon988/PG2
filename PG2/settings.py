@@ -77,13 +77,15 @@ WSGI_APPLICATION = 'PG2.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'PG2',
+        'NAME': 'pgtwo',
     }
 }
 
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
+
+# AUTH_USER_MODEL = 'main_app.Profile'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -124,3 +126,4 @@ LOGOUT_REDIRECT_URL = '/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

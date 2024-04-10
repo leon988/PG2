@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Update Profile</h1>
+
+<p class="red-text">{{ error_message }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <!-- user form -->
+    {{ user_form.as_p }}
+    <!-- profile  form -->
+    {{ profile_form.as_p }}
+    <button type="submit">Save changes</button>
+</form>
+
+{% endblock %}

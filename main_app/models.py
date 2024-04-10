@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -95,7 +96,7 @@ class Comment(models.Model):
     date = models.DateField("Comment Posting Date", default=now)
     comment = models.TextField(max_length=280)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-  # Create an art_id FK
+    # Create an art_id FK
     art = models.ForeignKey(Art, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -107,6 +108,18 @@ class Comment(models.Model):
     class Meta:
         ordering = ['-date']
 
+# Model "5": Profile (adding to User)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_pic = models.CharField(max_length=500)
+    bio = models.TextField(max_length=280)
+    location = models.CharField(max_length=50, blank=True)
 
-    
+# @receiver(post_save, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
 
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.profile.save()

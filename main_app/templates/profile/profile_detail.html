@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Profile!!!</h1>
+
+<div>
+    <h1>
+        <strong>
+                {{ user.first_name }} {{ user.last_name }}
+        </strong>
+    </h1>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+<!-- Model Profile is an extension of User, so it is user.profile.<profile_attribute> -->
+    <p><strong>Profile Picture:</strong> <img src="{{ user.profile.profile_pic }}" alt="{{ profile.user }}" width="30%" height="auto"></p>
+    <p><strong>Location:</strong> {{ user.profile.location }}</p>
+    <p><strong>Bio:</strong> {{ user.profile.bio }}</p>
+</div>
+
+{% endblock %}
