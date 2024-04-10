@@ -75,9 +75,7 @@ class CommentList(ListView):
 
 class CommentDetail(DetailView):
     model = Comment
-
-# Paul's alt version
-
+    
 class CommentCreate(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentForm
@@ -95,21 +93,7 @@ class CommentCreate(LoginRequiredMixin, CreateView):
         return context
 
     def get_success_url(self):
-        return reverse('post_detail', args=[self.object.post.pk])
-
-# Gueri's alt version
-# class CommentCreate(LoginRequiredMixin, CreateView):
-#     model = Comment
-#     form_class = CommentForm
-#     template_name = 'comments/art_detail.html'
-
-    # def form_valid(self, form):
-    #     form.instance.user = self.request.user
-    #     form.instance.date = timezone.now()
-    #     return super().form_valid(form)
-    
-    # def get_success_url(self):
-    #     return reverse('post_detail', kwargs={'pk': self.object.post.pk})
+        return reverse('arts_detail', args=[self.object.art.pk])
 
 class CommentUpdate(LoginRequiredMixin, UpdateView):
     model = Comment

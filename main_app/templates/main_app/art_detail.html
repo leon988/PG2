@@ -20,33 +20,32 @@
                 <!-- <p>Artist: {{ art.user.username }}</p> -->
             </div>
 
-            {% if user.is_authenticated %}
-            <h2>New Comment:</h2>
-            <form action="{% url 'comments_create' art.pk %}" method="POST">
-                {% csrf_token %}
-                <textarea name="comment" cols="40" rows="5" required></textarea>
-                <button type="submit">Post Comment</button>
-            </form>
-            {% else %}
-            <p><a href="{% url 'login' %}">Log in</a> to post comments.</p>
-            {% endif %}
-
-            <!-- working -->
-
-            <h3>Comments</h3>
-            {% for comment in art.comment_set.all %}
-            <p>{{ comment.user.username }} - {{ comment.date }} - {{ comment.comment }}</p>
-            {% empty %}
-            <p>No comments yet.</p>
-            {% endfor %}
-
-
-
             <div class="card-action">
                 <a href="{% url 'arts_update' art.id %}">Edit</a>
                 <a href="{% url 'arts_delete' art.id %}">Delete</a>
             </div>
         </div>
+
+        {% if user.is_authenticated %}
+        <h2>New Comment:</h2>
+        <form action="{% url 'comments_create' art.pk %}" method="POST">
+            {% csrf_token %}
+            <textarea name="comment" cols="40" rows="5" required></textarea>
+            <button type="submit">Post Comment</button>
+        </form>
+        {% else %}
+        <p><a href="{% url 'login' %}">Log in</a> to post comments.</p>
+        {% endif %}
+
+        <!-- working -->
+
+        <h3>Comments</h3>
+        {% for comment in art.comment_set.all %}
+        <p>{{ comment.user }} - {{ comment.date }} - {{ comment.comment }}</p>
+        {% empty %}
+        <p>No comments yet.</p>
+        {% endfor %}
+
     </div>
 </div>
 
