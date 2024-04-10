@@ -7,7 +7,7 @@
 <a href="{% url 'styles_detail' style.id %}">
     <div class="card">
         <div class="card-content">
-            <span class="card-title">{{ style.name }}</span>
+            <span class="card-title">{{ style.get_name_display }}</span>
         </div>
     </div>
 </a>
