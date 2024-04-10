@@ -20,20 +20,26 @@
                 <!-- <p>Artist: {{ art.user.username }}</p> -->
             </div>
 
-
-            <h2>Add a new comment</h2>
-            <form method="POST">
-              {% csrf_token %}
-              {{ form.as_p }}
-              <button type="submit">Add comment</button>
+            {% if user.is_authenticated %}
+            <h2>New Comment:</h2>
+            <form action="{% url 'comments_create' art.pk %}" method="POST">
+                {% csrf_token %}
+                <textarea name="comment" cols="40" rows="5" required></textarea>
+                <button type="submit">Post Comment</button>
             </form>
+            {% else %}
+            <p><a href="{% url 'login' %}">Log in</a> to post comments.</p>
+            {% endif %}
+
+            <!-- working -->
 
             <h3>Comments</h3>
-            {% for comment in post.comments.all %}
-              <p>{{ comment.user.username }} - {{ comment.created_date }} - {{ comment.text }}</p>
+            {% for comment in art.comment_set.all %}
+            <p>{{ comment.user.username }} - {{ comment.date }} - {{ comment.comment }}</p>
             {% empty %}
-              <p>No comments yet.</p>
+            <p>No comments yet.</p>
             {% endfor %}
+
 
 
             <div class="card-action">

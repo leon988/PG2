@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
@@ -76,6 +76,8 @@ class CommentList(ListView):
 class CommentDetail(DetailView):
     model = Comment
 
+# Paul's alt version
+
 class CommentCreate(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentForm
@@ -83,11 +85,31 @@ class CommentCreate(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.instance.date = timezone.now()
+        form.instance.art = get_object_or_404(Art, pk=self.kwargs['pk'])  # Associate the comment with the relevant art
         return super().form_valid(form)
-    
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.get_form()
+        context['art'] = get_object_or_404(Art, pk=self.kwargs['pk'])
+        return context
+
     def get_success_url(self):
-        return reverse('post_detail', kwargs={'pk': self.object.post.pk})
+        return reverse('post_detail', args=[self.object.post.pk])
+
+# Gueri's alt version
+# class CommentCreate(LoginRequiredMixin, CreateView):
+#     model = Comment
+#     form_class = CommentForm
+#     template_name = 'comments/art_detail.html'
+
+    # def form_valid(self, form):
+    #     form.instance.user = self.request.user
+    #     form.instance.date = timezone.now()
+    #     return super().form_valid(form)
+    
+    # def get_success_url(self):
+    #     return reverse('post_detail', kwargs={'pk': self.object.post.pk})
 
 class CommentUpdate(LoginRequiredMixin, UpdateView):
     model = Comment
