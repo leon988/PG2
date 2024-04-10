@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Art, Style, Medium, Comment
 from .forms import CommentForm
 from django.utils import timezone
+from django.urls import reverse_lazy
 
 # Create your views here.
 def home(request):
@@ -101,7 +102,9 @@ class CommentUpdate(LoginRequiredMixin, UpdateView):
 
 class CommentDelete(LoginRequiredMixin, DeleteView):
     model = Comment
-    success_url = '/comment'
+     
+    def get_success_url(self):
+        return reverse_lazy('arts_detail', kwargs={'pk':self.object.art.pk})
 
 
 # SIGNUP
