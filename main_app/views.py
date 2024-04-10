@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
@@ -7,8 +7,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Art, Style, Medium, Comment, Profile
 # from django.db import transaction
-from .forms import UserForm, ProfileForm
+from .forms import UserForm, ProfileForm, CommentForm
 # from django.contrib import messages
+from django.utils import timezone
+from django.urls import reverse_lazy
 
 # Create your views here.
 def home(request):
@@ -76,10 +78,25 @@ class CommentList(ListView):
 
 class CommentDetail(DetailView):
     model = Comment
-
+    
 class CommentCreate(LoginRequiredMixin, CreateView):
     model = Comment
-    fields = '__all__'
+    form_class = CommentForm
+    template_name = 'comments/art_detail.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.art = get_object_or_404(Art, pk=self.kwargs['pk'])  # Associate the comment with the relevant art
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.get_form()
+        context['art'] = get_object_or_404(Art, pk=self.kwargs['pk'])
+        return context
+
+    def get_success_url(self):
+        return reverse('arts_detail', args=[self.object.art.pk])
 
 class CommentUpdate(LoginRequiredMixin, UpdateView):
     model = Comment
@@ -87,7 +104,10 @@ class CommentUpdate(LoginRequiredMixin, UpdateView):
 
 class CommentDelete(LoginRequiredMixin, DeleteView):
     model = Comment
-    success_url = '/comment'
+     
+    def get_success_url(self):
+        return reverse_lazy('arts_detail', kwargs={'pk':self.object.art.pk})
+
 
 # SIGNUP
 def signup(request):
