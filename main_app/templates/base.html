@@ -29,6 +29,8 @@
                         <li><a href="{% url 'arts_create' %}">Add Art</a></li>
                         <li><a href="{% url 'styles_index' %}">View All Styles</a></li>
                         <li><a href="{% url 'mediums_index' %}">View All Mediums</a></li>
+                        <li><a href="{% url 'profile_detail' %}">View Profile</a></li>
+                        <li><a href="{% url 'profile_update' %}">Edit Profile</a></li>
                         <li>
                             <form action="{% url 'logout' %}" method="POST">
                                 {%csrf_token%}

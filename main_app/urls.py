@@ -31,9 +31,12 @@ urlpatterns = [
   path('comment/<int:pk>/update/', views.CommentUpdate.as_view(), name='comments_update'),
   path('comment/<int:pk>/delete/', views.CommentDelete.as_view(), name='comments_delete'),
 
-  # Model 5 - User
+  # Django Authentication
   path('accounts/signup/', views.signup, name='signup'),
 
+  # Model 5 - Profile (Extension of User)
+  path('profile/detail/', views.user_profile, name='profile_detail'),
+  path('profile/update/', views.profile, name='profile_update'),
 
 # hi team!
 ]
