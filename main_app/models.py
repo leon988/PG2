@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from django.conf import settings
 # Create your models here.
 
 MEDIUM = (
@@ -93,7 +94,7 @@ class Art(models.Model):
 class Comment(models.Model):
     date = models.DateField("Comment Posting Date", default=now)
     comment = models.TextField(max_length=280)
-
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
   # Create an art_id FK
     art = models.ForeignKey(Art, on_delete=models.CASCADE)
 
@@ -103,8 +104,8 @@ class Comment(models.Model):
     def get_absolute_url(self):
         return reverse('comments_detail', kwargs={'pk': self.id})
     
-    # class Meta:
-    #     ordering = ['-date']
+    class Meta:
+        ordering = ['-date']
 
 
     

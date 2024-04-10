@@ -20,6 +20,22 @@
                 <!-- <p>Artist: {{ art.user.username }}</p> -->
             </div>
 
+
+            <h2>Add a new comment</h2>
+            <form method="POST">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit">Add comment</button>
+            </form>
+
+            <h3>Comments</h3>
+            {% for comment in post.comments.all %}
+              <p>{{ comment.user.username }} - {{ comment.created_date }} - {{ comment.text }}</p>
+            {% empty %}
+              <p>No comments yet.</p>
+            {% endfor %}
+
+
             <div class="card-action">
                 <a href="{% url 'arts_update' art.id %}">Edit</a>
                 <a href="{% url 'arts_delete' art.id %}">Delete</a>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
@@ -6,6 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 # from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Art, Style, Medium, Comment
+from .forms import CommentForm
+from django.utils import timezone
 
 # Create your views here.
 def home(request):
@@ -76,7 +78,16 @@ class CommentDetail(DetailView):
 
 class CommentCreate(LoginRequiredMixin, CreateView):
     model = Comment
-    fields = '__all__'
+    form_class = CommentForm
+    template_name = 'comments/art_detail.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.date = timezone.now()
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse('post_detail', kwargs={'pk': self.object.post.pk})
 
 class CommentUpdate(LoginRequiredMixin, UpdateView):
     model = Comment
@@ -85,6 +96,7 @@ class CommentUpdate(LoginRequiredMixin, UpdateView):
 class CommentDelete(LoginRequiredMixin, DeleteView):
     model = Comment
     success_url = '/comment'
+
 
 # SIGNUP
 def signup(request):
