@@ -13,7 +13,10 @@
                 <!-- <p>Date: {{ art.date }}</p> -->
                 <p>Price: {{ art.price }}</p>
                 <!-- <p>Likes: {{ art.like }}</p> -->
-                <p>Style: {{ art.style }}</p>
+                <p>Style:
+                {% for style in art.style.all %}
+                {{ style.get_name_display }}</p>
+                {% endfor %}
                 <p>Medium: {{ art.medium }}</p>
 
                 <!-- TODO: this will be done when we get to Django Authentication -->
@@ -38,13 +41,20 @@
         {% endif %}
 
         <!-- working -->
-
-        <h3>Comments</h3>
-        {% for comment in art.comment_set.all %}
-        <p>{{ comment.user }} - {{ comment.date }} - {{ comment.comment }}</p>
-        {% empty %}
-        <p>No comments yet.</p>
-        {% endfor %}
+        <div> 
+            <h3>Comments</h3>
+            {% for comment in art.comment_set.all %}
+            <p>{{ comment.user }} - {{ comment.date }} - {{ comment.comment }}</p>
+            <a href="{% url 'comments_update' comment.pk %}">
+                <span class="material-symbols-outlined">edit</span>
+            </a>
+            <a href="{% url 'comments_delete' comment.pk %}">
+                <span class="material-symbols-outlined">delete</span>
+            </a>
+            {% empty %}
+            <p>No comments yet.</p>
+            {% endfor %}
+        </div>
 
     </div>
 </div>
