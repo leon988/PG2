@@ -5,12 +5,11 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Art, Style, Medium, Comment, Profile
-# from django.db import transaction
-from .forms import UserForm, ProfileForm, CommentForm
-# from django.contrib import messages
 from django.utils import timezone
 from django.urls import reverse_lazy
+from .models import Art, Style, Medium, Comment, Profile
+from .forms import UserForm, ProfileForm, CommentForm
+
 
 # Create your views here.
 def home(request):
@@ -18,6 +17,7 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html')
+
 
 # Model 1: Art
 class ArtList(ListView):
@@ -42,6 +42,7 @@ class ArtDelete(LoginRequiredMixin, DeleteView):
     model = Art
     success_url= '/art'
 
+
 # Model 2: Style
 class StyleList(ListView):
     model = Style
@@ -57,6 +58,7 @@ class StyleDelete(LoginRequiredMixin, DeleteView):
     model = Style
     success_url = '/style'
 
+
 # Model 3: Medium
 class MediumList(ListView):
     model = Medium
@@ -71,6 +73,7 @@ class MediumUpdate(LoginRequiredMixin, UpdateView):
 class MediumDelete(LoginRequiredMixin, DeleteView):
     model = Medium
     success_url = '/medium'
+
 
 # Model 4: Comment
 class CommentList(ListView):
@@ -104,12 +107,12 @@ class CommentUpdate(LoginRequiredMixin, UpdateView):
 
 class CommentDelete(LoginRequiredMixin, DeleteView):
     model = Comment
-     
+
     def get_success_url(self):
         return reverse_lazy('arts_detail', kwargs={'pk':self.object.art.pk})
 
 
-# SIGNUP
+# Django Authentication - Sign Up
 def signup(request):
     error_message = ''
     if request.method == 'POST':
@@ -125,31 +128,6 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
-
-
-
-# @login_required
-# @transaction.atomic
-# def update_profile(request):
-#     user = request.user
-#     if request.method == 'POST':
-#         user_form = UserForm(request.POST, instance=user)
-#         profile_form = ProfileForm(request.POST, instance=user.profile)
-#         if user_form.is_valid() and profile_form.is_valid():
-#             user_form.save()
-#             profile_form.save()
-#             messages.success(request, ('Your profile was successfully updated!'))
-#             return redirect('settings:profile')
-#         else:
-#             messages.error(request, ('Please correct the error below.'))
-#     else:
-#         user_form = UserForm(instance=user)
-#         profile_form = ProfileForm(instance=user.profile)
-#     return render(request, 'registration/profile.html', {
-#         'user_form': user_form,
-#         'profile_form': profile_form
-#     })
-
 
 
 # Model 5: Profile - we did it!

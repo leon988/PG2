@@ -6,6 +6,7 @@ from django.utils.timezone import now
 from django.conf import settings
 # Create your models here.
 
+
 MEDIUM = (
     ('DIG','Digital'),
     ('MUR','Mural'),
@@ -27,12 +28,12 @@ MEDIUM = (
     ('INST', 'Installation Art'),
     ('GLASS', 'Glass Art'),
     ('MTL', 'Metal Work'),
-    ('LEET', 'Leather Work'),
+    ('LEAT', 'Leather Work'),
     ('PEP', 'Paper Art / Origami'),
     ('MOS', 'Mosaic'),
     ('BOD', 'Body Art / Tattoo'),
     ('SND', 'Sound Art / Music'),
-    ('OTH', 'Others')
+    ('OTH', 'Other')
 )
 
 STYLES = (
@@ -48,9 +49,8 @@ STYLES = (
     ('MIN', 'Minimalism'),
     ('CON', 'Contemporary'),
     ('THA', 'Thangka'),
-    ('OTH', 'Others')
+    ('OTH', 'Other')
 )
-
 
 # Model 3: Medium
 class Medium(models.Model):
@@ -62,7 +62,6 @@ class Medium(models.Model):
     def get_absolute_url(self):
         return reverse('mediums_detail', kwargs={'pk': self.id})
 
-
 # Model 2: Style
 class Style(models.Model):
     name = models.CharField(max_length=75, choices=STYLES, default=STYLES[0][0])
@@ -72,7 +71,7 @@ class Style(models.Model):
         
     def get_absolute_url(self):
         return reverse('styles_detail', kwargs={'pk': self.id})
-    
+
 # Model 1: Art
 class Art(models.Model):
     title = models.CharField(max_length=75)
@@ -84,19 +83,18 @@ class Art(models.Model):
     style = models.ManyToManyField(Style)
     medium = models.ForeignKey(Medium, on_delete=models.PROTECT)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     def __str__(self):
         return f'{self.title} ({self.id})'
 
     def get_absolute_url(self):
         return reverse('arts_detail', kwargs={'pk': self.id})
 
-
 # Model 4: Comment
 class Comment(models.Model):
     date = models.DateField("Comment Posting Date", default=now)
     comment = models.TextField(max_length=280)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    # Create an art_id FK
     art = models.ForeignKey(Art, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -108,18 +106,10 @@ class Comment(models.Model):
     class Meta:
         ordering = ['-date']
 
+
 # Model "5": Profile (adding to User)
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.CharField(max_length=500)
     bio = models.TextField(max_length=280)
     location = models.CharField(max_length=50, blank=True)
-
-# @receiver(post_save, sender=User)
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(user=instance)
-
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.profile.save()
