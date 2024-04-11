@@ -1,62 +1,74 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Art Details</h1>
+<h1>Art Detail</h1>
 
 <div class="row">
     <div class="col s6 col-offset-3">
         <div class="card">
             <div class="card-content">
                 <span class="card-title">{{ art.title }}</span>
-                <p>Image: <img src="{{ art.image }}" alt="{{ art.title }}" width="60%" height="auto">
-                <p>Description: {{ art.description }}</p>
-                <!-- <p>Date: {{ art.date }}</p> -->
-                <p>Price: {{ art.price }}</p>
-                <!-- <p>Likes: {{ art.like }}</p> -->
+                <p> by {{ user.first_name }} {{ user.last_name }}</p>
+                <p><img src="{{ art.image }}" alt="{{ art.title }}" width="60%" height="auto">
+                <p>Description: {{ art.description|linebreaks }}</p>
+                <hr>
+                <p>Date Created: {{ art.date }}</p>
+                <p>Valuation: ${{ art.price }}</p>
                 <p>Style:
-                {% for style in art.style.all %}
-                {{ style.get_name_display }}</p>
+                    {% for style in art.style.all %}
+                    {{ style.get_name_display }}
+                </p>
                 {% endfor %}
                 <p>Medium: {{ art.medium }}</p>
-
-                <!-- TODO: this will be done when we get to Django Authentication -->
-                <!-- <p>Artist: {{ art.user.username }}</p> -->
+                <p>Likes: {{ art.like }}</p>
             </div>
-
             <div class="card-action">
-                <a href="{% url 'arts_update' art.id %}">Edit</a>
-                <a href="{% url 'arts_delete' art.id %}">Delete</a>
+                <a href="{% url 'increment_likes' art.id %}">
+                    <span class="material-symbols-outlined">heart_plus</span>
+                </a>
+                <a href="{% url 'arts_update' art.id %}">
+                    <span class="material-symbols-outlined">edit</span>
+                </a>
+                <a href="{% url 'arts_delete' art.id %}">
+                    <span class="material-symbols-outlined">delete</span>
+                </a>
             </div>
         </div>
-
-        {% if user.is_authenticated %}
-        <h2>New Comment:</h2>
-        <form action="{% url 'comments_create' art.pk %}" method="POST">
-            {% csrf_token %}
-            <textarea name="comment" cols="40" rows="5" required></textarea>
-            <button type="submit">Post Comment</button>
-        </form>
-        {% else %}
-        <p><a href="{% url 'login' %}">Log in</a> to post comments.</p>
-        {% endif %}
-
-        <!-- working -->
-        <div> 
-            <h3>Comments</h3>
-            {% for comment in art.comment_set.all %}
-            <p>{{ comment.user }} - {{ comment.date }} - {{ comment.comment }}</p>
-            <a href="{% url 'comments_update' comment.pk %}">
-                <span class="material-symbols-outlined">edit</span>
-            </a>
-            <a href="{% url 'comments_delete' comment.pk %}">
-                <span class="material-symbols-outlined">delete</span>
-            </a>
-            {% empty %}
-            <p>No comments yet.</p>
-            {% endfor %}
-        </div>
-
     </div>
 </div>
+
+<hr>
+
+<!-- Add Comment -->
+{% if user.is_authenticated %}
+    <h2>New Comment:</h2>
+    <form action="{% url 'comments_create' art.pk %}" method="POST">
+        {% csrf_token %}
+        <textarea name="comment" cols="40" rows="5" required></textarea>
+        <button type="submit">Post Comment</button>
+    </form>
+{% else %}
+    <p><a href="{% url 'login' %}">Log in</a> to post comments.</p>
+{% endif %}
+
+<!-- Read Comment(s) -->
+<div>
+    <h3>Comments</h3>
+    {% for comment in art.comment_set.all %}
+        <p><img src="{{ comment.profile.profile_pic }}" alt="Profile Picture" width="20%" height="auto"></p>
+        <p>{{ comment.comment }}</p>
+        <p>{{ comment.user }} - {{ comment.date }}</p>
+    <!-- Comment Actions: Update, Delete  -->
+        <a href="{% url 'comments_update' comment.pk %}">
+            <span class="material-symbols-outlined">edit</span>
+        </a>
+        <a href="{% url 'comments_delete' comment.pk %}">
+            <span class="material-symbols-outlined">delete</span>
+        </a>
+    {% empty %}
+        <p>No comments yet!</p>
+    {% endfor %}
+</div>
+
 
 {% endblock %}
