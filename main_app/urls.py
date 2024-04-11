@@ -11,6 +11,7 @@ urlpatterns = [
   path('art/create/', views.ArtCreate.as_view(), name='arts_create'),
   path('art/<int:pk>/update/', views.ArtUpdate.as_view(), name='arts_update'),
   path('art/<int:pk>/delete/', views.ArtDelete.as_view(), name='arts_delete'),
+  path('art/<int:art_id>/like/', views.increment_likes, name='increment_likes'), # this is for incrementing 'art likes' art/id/like
 
   # Model 2 - Style RUD
   path('style/', views.StyleList.as_view(), name='styles_index'),

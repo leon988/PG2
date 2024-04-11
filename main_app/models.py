@@ -96,6 +96,7 @@ class Comment(models.Model):
     comment = models.TextField(max_length=280)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     art = models.ForeignKey(Art, on_delete=models.CASCADE)
+    profile = models.ForeignKey('Profile', on_delete=models.CASCADE, blank=True, null=True)   
 
     def __str__(self):
         return f'Comment by {self.user.username} on {self.date}'
@@ -110,6 +111,6 @@ class Comment(models.Model):
 # Model "5": Profile (adding to User)
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_pic = models.CharField(max_length=500)
+    profile_pic = models.CharField(max_length=500, blank=True, null=True)
     bio = models.TextField(max_length=280)
     location = models.CharField(max_length=50, blank=True)

@@ -42,6 +42,12 @@ class ArtDelete(LoginRequiredMixin, DeleteView):
     model = Art
     success_url= '/art'
 
+def increment_likes(request, art_id):
+    art = get_object_or_404(Art, pk=art_id)
+    art.like += 1
+    art.save()
+    return redirect('arts_detail', pk=art_id)
+
 
 # Model 2: Style
 class StyleList(ListView):
@@ -155,3 +161,7 @@ def profile(request):
     context = {'user_form': user_form, 'profile_form': profile_form, 'error_message': error_message}
     return render(request, 'profile/profile_form.html', context)
 
+
+
+
+# ref: https://www.geeksforgeeks.org/get_object_or_404-method-in-django-models/
