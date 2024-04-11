@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Profile!!!</h1>
+<p><a href="{% url 'profile_update' %}">Edit Profile</a></p>
+<div>
+    <h1>
+        <strong>
+                {{ user.first_name }} {{ user.last_name }}
+        </strong>
+    </h1>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+<!-- Model Profile is an extension of User, so it is user.profile.<profile_attribute> -->
+    <p><strong>Profile Picture:</strong> <img src="{{ user.profile.profile_pic }}" alt="{{ profile.user }}" width="30%" height="auto"></p>
+    <p><strong>Location:</strong> {{ user.profile.location }}</p>
+    <p><strong>Bio:</strong> {{ user.profile.bio }}</p>
+</div>
+<hr>
+
+<h1>My Art {{ style.get_name_display }}</h1>
+{% for art in user.art_set.all %}
+<div class="row">
+    {% for art in artworks %}
+    <div class="col s12 m6 l4">
+        <div class="card">
+            <div class="card-image">
+                <img src="{{ art.image }}">
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>No artworks found under this medium.</p>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

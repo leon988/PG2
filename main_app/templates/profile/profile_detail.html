@@ -6,15 +6,28 @@
 <div>
     <h1>
         <strong>
-                {{ user.first_name }} {{ user.last_name }}
+            {{ user.first_name }} {{ user.last_name }}
         </strong>
     </h1>
     <p><strong>Username:</strong> {{ user.username }}</p>
-<!-- Model Profile is an extension of User, so it is user.profile.<profile_attribute> -->
-    <p><strong>Profile Picture:</strong> <img src="{{ user.profile.profile_pic }}" alt="{{ profile.user }}" width="30%" height="auto"></p>
+    <!-- Model Profile is an extension of User, so it is user.profile.<profile_attribute> -->
+    <p><strong>Profile Picture:</strong> <img src="{{ user.profile.profile_pic }}" alt="{{ profile.user }}" width="30%"
+            height="auto"></p>
     <p><strong>Location:</strong> {{ user.profile.location }}</p>
     <p><strong>Bio:</strong> {{ user.profile.bio }}</p>
 </div>
+<hr>
 
+<h1>My Art {{ style.get_name_display }}</h1>
+{% for art in user.art_set.all %}
+
+<a href="{% url 'arts_detail' art.id %}" class="card-link">
+    <div class="card-image">
+        <img src="{{ art.image }}" alt="{{ art.title }}" style="width:50%; height:auto;">
+    </div>
+</a>
+
+
+{% endfor %}
 
 {% endblock %}
