@@ -30,7 +30,7 @@ urlpatterns = [
   path('comment/<int:pk>/', views.CommentDetail.as_view(), name='comments_detail'),
   path('comment/create/', views.CommentCreate.as_view(), name='comments_create'),
   path('art/<int:pk>/comment/create/', views.CommentCreate.as_view(), name='comments_create'),
-  path('comment/<int:pk>/comment/update/', views.CommentUpdate.as_view(), name='comments_update'),
+  path('comment/<int:pk>/update', views.CommentUpdate.as_view(), name='comments_update'),
   path('comment/<int:pk>/comment/delete/', views.CommentDelete.as_view(), name='comments_delete'),
 
   # Django Authentication

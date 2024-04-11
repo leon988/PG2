@@ -109,7 +109,14 @@ class CommentCreate(LoginRequiredMixin, CreateView):
 
 class CommentUpdate(LoginRequiredMixin, UpdateView):
     model = Comment
-    fields = '__all__'
+    form_class = CommentForm
+    template_name = 'main_app/comment_form.html'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('arts_detail', kwargs={'pk': self.object.art.pk})
 
 class CommentDelete(LoginRequiredMixin, DeleteView):
     model = Comment
