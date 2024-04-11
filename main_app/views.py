@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from django.urls import reverse_lazy
-from .models import Art, Style, Medium, Comment, Profile
+from .models import Art, Style, Medium, Comment, Profile, ArtworkTag
 from .forms import UserForm, ProfileForm, CommentForm
 
 
@@ -53,8 +53,23 @@ def increment_likes(request, art_id):
 class StyleList(ListView):
     model = Style
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset |= Art.objects.filter(style__in=queryset)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['arts'] = Art.objects.filter(style__in=context['object_list'])
+        return context
+
 class StyleDetail(LoginRequiredMixin, DetailView):
     model = Style
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['arts'] = Art.objects.filter(style=self.object)
+        return context
 
 class StyleUpdate(LoginRequiredMixin, UpdateView):
     model = Style
@@ -80,6 +95,7 @@ class MediumDelete(LoginRequiredMixin, DeleteView):
     model = Medium
     success_url = '/medium'
 
+# Model: Artwork search
 
 # Model 4: Comment
 class CommentList(ListView):

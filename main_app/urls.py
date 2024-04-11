@@ -40,5 +40,7 @@ urlpatterns = [
   path('profile/detail/', views.user_profile, name='profile_detail'),
   path('profile/update/', views.profile, name='profile_update'),
 
+  # Model 6:
+   
 # hi team!
 ]

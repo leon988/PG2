@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Art Styles</h1>
+  <ul>
+    {% for style in styles %}
+      <li><a href="{% url 'art_by_style' style.slug %}">{{ style }}</a></li>
+    {% endfor %}
+  </ul>
+
+  <h1>Art Mediums</h1>
+  <ul>
+    {% for medium in media %}
+      <li><a href="{% url 'art_by_medium' medium.slug %}">{{ medium }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

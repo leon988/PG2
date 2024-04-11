@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
+
 {% block content %}
 
-<h1>Art Style</h1>
+<h1>{{ object.get_name_display }}</h1>
 
-<div class="row">
-    <div class="col s6 col-offset-3">
-        <div class="card">
-            <div class="card-content">
-                <span class="card-title">{{ style.get_name_display }}</span>
-            </div>
+{% for art in arts %}
+<a href="{% url 'arts_detail' art.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ art.title }}</span>
         </div>
     </div>
-</div>
+</a>
+{% endfor %}
 
 {% endblock %}

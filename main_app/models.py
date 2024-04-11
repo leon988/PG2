@@ -114,3 +114,12 @@ class Profile(models.Model):
     profile_pic = models.CharField(max_length=500, blank=True, null=True)
     bio = models.TextField(max_length=280)
     location = models.CharField(max_length=50, blank=True)
+
+# Model "6": Artwork search
+class ArtworkTag(models.Model):
+    artwork = models.ForeignKey(Art, on_delete=models.CASCADE)
+    style = models.ForeignKey(Style, on_delete=models.CASCADE)
+    medium = models.ForeignKey(Medium, on_delete=models.CASCADE, null=True, blank=True)
+
+    class Meta:
+        unique_together = ('artwork', 'style', 'medium')
