@@ -55,6 +55,13 @@ class StyleList(ListView):
 
 class StyleDetail(LoginRequiredMixin, DetailView):
     model = Style
+    template_name = 'main_app/style_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        style = self.get_object()
+        context['artworks'] = Art.objects.filter(style=style)  
+        return context
 
 class StyleUpdate(LoginRequiredMixin, UpdateView):
     model = Style
@@ -71,6 +78,14 @@ class MediumList(ListView):
 
 class MediumDetail(LoginRequiredMixin, DetailView):
     model = Medium
+    template_name = 'main_app/medium_detail.html'  
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        medium = self.get_object()
+        context['artworks'] = Art.objects.filter(medium=medium)  
+        return context
+
 
 class MediumUpdate(LoginRequiredMixin, UpdateView):
     model = Medium
