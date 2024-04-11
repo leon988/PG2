@@ -55,7 +55,8 @@
 <div>
     <h3>Comments</h3>
     {% for comment in art.comment_set.all %}
-        <p><img src="{{ comment.profile.profile_pic }}" alt="Profile Picture" width="20%" height="auto"></p>
+
+        <p><img src="{{ comment.user.profile.profile_pic }}" alt="Profile Picture" width="5%" height="auto"></p>
         <p>{{ comment.comment }}</p>
         <p>{{ comment.user }} - {{ comment.date }}</p>
     <!-- Comment Actions: Update, Delete  -->
