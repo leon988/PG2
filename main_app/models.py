@@ -52,6 +52,7 @@ STYLES = (
     ('OTH', 'Other')
 )
 
+
 # Model 3: Medium
 class Medium(models.Model):
     name = models.CharField(max_length=75, choices=MEDIUM, default=MEDIUM[0][0])
@@ -61,6 +62,7 @@ class Medium(models.Model):
         
     def get_absolute_url(self):
         return reverse('mediums_detail', kwargs={'pk': self.id})
+
 
 # Model 2: Style
 class Style(models.Model):
@@ -72,16 +74,17 @@ class Style(models.Model):
     def get_absolute_url(self):
         return reverse('styles_detail', kwargs={'pk': self.id})
 
+
 # Model 1: Art
 class Art(models.Model):
     title = models.CharField(max_length=75)
     image = models.CharField(max_length=500)
-    description = models.TextField(max_length=750)
     date = models.DateField('Art Creation Date', default=now)
-    price = models.DecimalField(max_digits=1000, decimal_places=2)
-    like = models.IntegerField(default=0)
+    price = models.DecimalField('Valuation', max_digits=1000, decimal_places=2)
     style = models.ManyToManyField(Style)
     medium = models.ForeignKey(Medium, on_delete=models.PROTECT)
+    description = models.TextField(max_length=750)
+    like = models.IntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -89,6 +92,7 @@ class Art(models.Model):
 
     def get_absolute_url(self):
         return reverse('arts_detail', kwargs={'pk': self.id})
+
 
 # Model 4: Comment
 class Comment(models.Model):
