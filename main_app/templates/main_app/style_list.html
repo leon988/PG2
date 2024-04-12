@@ -4,7 +4,6 @@
 <h1>Style List</h1>
 
 <div class="card-grid">
-    <img src="https://sparksgallery.com/wp-content/uploads/2023/06/image-4.png" alt="{{ style.title }}">
     {% for style in object_list %}
         <div class="cards">
             <a href="{% url 'styles_detail' style.id %}">

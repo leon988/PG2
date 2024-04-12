@@ -1,18 +1,30 @@
 body, html {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: 
-      linear-gradient(rgba(215, 214, 214, 0.2) 1px, transparent 1px),
-      linear-gradient(to right, rgba(215, 214, 214, 0.2) 1px, transparent 1px);
-    background-size: 50px 50px;
-    color: #333;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: 
+    linear-gradient(rgba(215, 214, 214, 0.2) 1px, transparent 1px),
+    linear-gradient(to right, rgba(215, 214, 214, 0.2) 1px, transparent 1px);
+  background-size: 50px 50px;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home {
+  text-align: center;
+}
+
+.home h1 {
+  font-size: 2em;
+}
+
+.home p {
+  font-size: 1.2em;
+}
 
 nav {
   background-color: rgb(0, 0, 0,0.2);
