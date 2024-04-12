@@ -6,22 +6,13 @@ body, html {
     background: 
       linear-gradient(rgba(215, 214, 214, 0.2) 1px, transparent 1px),
       linear-gradient(to right, rgba(215, 214, 214, 0.2) 1px, transparent 1px);
-    background-size: 50px 50px, 50px 50px, auto;
+    background-size: 50px 50px;
     color: #333;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-
-/* main {
-    flex: 1 0 auto;
-}
-
-footer.page-footer {
-    padding-top: 0;
-    text-align: right;
-} */
 
 
 nav {
@@ -62,3 +53,37 @@ footer.page-footer {
   object-fit: cover; 
 } 
 
+
+.art-image {
+  vertical-align: top;
+}
+
+.art-title {
+  margin-top: 0;
+}
+
+
+.comment-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.comment-avatar {
+  flex-shrink: 0;
+  margin-right: 20px; /* Space between avatar and text */
+}
+
+.comment-avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.comment-content {
+  flex-grow: 1;
+}
+
+.comment-actions {
+  margin-left: 20px; /* Optional space between content and actions */
+}
