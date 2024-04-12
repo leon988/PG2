@@ -46,6 +46,7 @@ main {
 footer.page-footer {
   padding-top: 0;
   text-align: right;
-  background-color: #fafafa; /* Slightly off-white background for footer */
+  background-color:black; /* Slightly off-white background for footer */
   color: #666; /* Darker text color for contrast */
 }
+
