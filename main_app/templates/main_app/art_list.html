@@ -14,11 +14,11 @@
             </div>
             <div class="card-content">
                 <span class="card-title">{{ art.title }}</span>
-                <p>{{ art.description|truncatechars:100 }}</p>
+                <!-- <p>{{ art.description|truncatechars:100 }}</p> -->
             </div>
-            <div class="card-action">
+            <!-- <div class="card-action">
                 <a href="{% url 'arts_detail' art.id %}" class="btn">View Details</a>
-            </div>
+            </div> -->
         </div>
     </div>
     {% endfor %}
