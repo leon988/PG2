@@ -1,33 +1,48 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Profile!!!</h1>
-<p><a href="{% url 'profile_update' %}">Edit Profile</a></p>
-<div>
-    <h1>
-        <strong>
-            {{ user.first_name }} {{ user.last_name }}
-        </strong>
-    </h1>
-    <p><strong>Username:</strong> {{ user.username }}</p>
-    <!-- Model Profile is an extension of User, so it is user.profile.<profile_attribute> -->
-    <p><strong>Profile Picture:</strong> <img src="{{ user.profile.profile_pic }}" alt="{{ profile.user }}" width="30%"
-            height="auto"></p>
-    <p><strong>Location:</strong> {{ user.profile.location }}</p>
-    <p><strong>Bio:</strong> {{ user.profile.bio }}</p>
+<!-- Profile Section -->
+<div style="display: flex; align-items: start; justify-content: start; margin-bottom: 20px;">
+
+    <!-- Profile Image -->
+    <div style="flex: 0 0 200px; padding: 10px;">
+        <img src="{{ user.profile.profile_pic }}" alt="Profile of {{ user.username }}" style="width:100%; height:auto; border-radius: 10px;">
+    </div>
+
+    <!-- Bio and Details Card -->
+    <div class="card" style="flex: 1; margin-left: 20px;">
+        <div class="card-content" style="padding: 20px; background-color: white; border: 1px solid rgb(205, 205, 205);">
+            
+            <!-- Name -->
+            <h1><strong>{{ user.first_name }} {{ user.last_name }}</strong></h1>
+
+            <!-- Username -->
+            <p><span style="font-weight: bold;">Username:</span> {{ user.username }}</p>
+
+            <!-- Location -->
+            <p><span style="font-weight: bold;">Location:</span> {{ user.profile.location }}</p>
+
+            <!-- Bio -->
+            <p><span style="font-weight: bold;">Bio:</span> {{ user.profile.bio }}</p>
+            
+        </div>
+        <p style="text-align:center;"><a href="{% url 'profile_update' %}">Edit Profile</a></p>
+    </div>
+
 </div>
+
+<!-- Art Header -->
+<h1
+ style="text-align:center;">My Art {{ style.get_name_display }}</h1>
 <hr>
 
-<h1>My Art {{ style.get_name_display }}</h1>
+<!-- Art Works Gallery -->
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
 {% for art in user.art_set.all %}
-
-<a href="{% url 'arts_detail' art.id %}" class="card-link">
-    <div class="card-image">
-        <img src="{{ art.image }}" alt="{{ art.title }}" style="width:50%; height:auto;">
-    </div>
-</a>
-
-
+    <a href="{% url 'arts_detail' art.id %}" class="card-link" style="width: 30%; margin: 10px; display: block;">
+        <img src="{{ art.image }}" alt="{{ art.title }}" style="width: 100%; height:auto;">
+    </a>
 {% endfor %}
+</div>
 
 {% endblock %}

@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Art Detail</h1>
-
 <div class="row">
-    <div class="col s6 col-offset-3">
+    <div class="col s6">
+        <!-- Image on top left -->
+        <img src="{{ art.image }}" alt="{{ art.title }}" class="art-image" width="100%" height="auto">
+    </div>
+    <div class="col s6">
+        <!-- Art title as header on top right -->
+        <h1 class="art-title">{{ art.title }}</h1>
         <div class="card">
             <div class="card-content">
-                <span class="card-title">{{ art.title }}</span>
-                <p> by {{ user.first_name }} {{ user.last_name }}</p>
-                <p><img src="{{ art.image }}" alt="{{ art.title }}" width="60%" height="auto">
+                <p> <strong>Artist:</strong> {{ user.first_name }} {{ user.last_name }}</p>
                 <p>Description: {{ art.description|linebreaks }}</p>
                 <hr>
                 <p>Date Created: {{ art.date }}</p>
@@ -17,8 +19,8 @@
                 <p>Style:
                     {% for style in art.style.all %}
                     {{ style.get_name_display }}
+                    {% endfor %}
                 </p>
-                {% endfor %}
                 <p>Medium: {{ art.medium }}</p>
                 <p>Likes: {{ art.like }}</p>
             </div>
@@ -41,7 +43,7 @@
 
 <!-- Add Comment -->
 {% if user.is_authenticated %}
-    <h2>New Comment:</h2>
+    <h2>New Comment</h2>
     <form action="{% url 'comments_create' art.pk %}" method="POST">
         {% csrf_token %}
         <textarea name="comment" cols="40" rows="5" required></textarea>
@@ -55,21 +57,29 @@
 <div>
     <h3>Comments</h3>
     {% for comment in art.comment_set.all %}
-
-        <p><img src="{{ comment.user.profile.profile_pic }}" alt="Profile Picture" width="5%" height="auto"></p>
-        <p>{{ comment.comment }}</p>
-        <p>{{ comment.user }} - {{ comment.date }}</p>
-    <!-- Comment Actions: Update, Delete  -->
-        <a href="{% url 'comments_update' comment.pk %}">
-            <span class="material-symbols-outlined">edit</span>
-        </a>
-        <a href="{% url 'comments_delete' comment.pk %}">
-            <span class="material-symbols-outlined">delete</span>
-        </a>
+        <div class="comment-container" style="display: flex; align-items: center; margin-bottom: 10px;">
+            <div class="comment-avatar" style="flex-shrink: 0;">
+                <img src="{{ comment.user.profile.profile_pic }}" alt="Profile Picture" style="width: 50px; height: 50px; border-radius: 50%;">
+            </div>
+            <div class="comment-content" style="flex-grow: 1; margin-left: 20px;">
+                <p><strong>{{ comment.user.first_name }} {{ comment.user.last_name }}</strong></p>
+                <p>{{ comment.comment }}</p>
+                <p>{{ comment.date }}</p>
+            </div>
+            <!-- Comment Actions: Update, Delete  -->
+            <div class="comment-actions">
+                <a href="{% url 'comments_update' comment.pk %}">
+                    <span class="material-symbols-outlined">edit</span>
+                </a>
+                <a href="{% url 'comments_delete' comment.pk %}">
+                    <span class="material-symbols-outlined">delete</span>
+                </a>
+            </div>
+        </div>
     {% empty %}
         <p>No comments yet!</p>
     {% endfor %}
 </div>
 
-
 {% endblock %}
+
