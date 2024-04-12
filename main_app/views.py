@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from django.urls import reverse_lazy
 from .models import Art, Style, Medium, Comment, Profile
-from .forms import UserForm, ProfileForm, CommentForm
+from .forms import UserForm, ProfileForm, CommentForm, ArtForm
 
 
 # Create your views here.
@@ -28,7 +28,7 @@ class ArtDetail(DetailView):
 
 class ArtCreate(LoginRequiredMixin, CreateView):
     model = Art
-    fields =['title', 'image', 'description', 'price', 'style', 'medium']
+    form_class = ArtForm
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -36,7 +36,7 @@ class ArtCreate(LoginRequiredMixin, CreateView):
 
 class ArtUpdate(LoginRequiredMixin, UpdateView):
     model = Art
-    fields = ['title', 'image', 'description', 'price', 'style', 'medium']
+    form_class = ArtForm
 
 class ArtDelete(LoginRequiredMixin, DeleteView):
     model = Art
@@ -85,7 +85,6 @@ class MediumDetail(LoginRequiredMixin, DetailView):
         medium = self.get_object()
         context['artworks'] = Art.objects.filter(medium=medium)  
         return context
-
 
 class MediumUpdate(LoginRequiredMixin, UpdateView):
     model = Medium
@@ -187,3 +186,4 @@ def profile(request):
 
 
 # ref: https://www.geeksforgeeks.org/get_object_or_404-method-in-django-models/
+# ref: https://stackoverflow.com/questions/4101258/how-do-i-add-a-placeholder-on-a-charfield-in-django
