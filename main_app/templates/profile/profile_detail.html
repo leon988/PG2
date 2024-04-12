@@ -2,16 +2,16 @@
 {% block content %}
 
 <!-- Profile Section -->
-<div style="display: flex; align-items: start; justify-content: start; margin-bottom: 20px;">
+<div style="display: flex; align-items: flex-start; justify-content: start; margin-bottom: 20px;">
 
     <!-- Profile Image -->
     <div style="flex: 0 0 200px; padding: 10px;">
         <img src="{{ user.profile.profile_pic }}" alt="Profile of {{ user.username }}" style="width:100%; height:auto; border-radius: 10px;">
     </div>
 
-    <!-- Bio and Details Card -->
-    <div class="card" style="flex: 1; margin-left: 20px;">
-        <div class="card-content" style="padding: 20px; background-color: white; border: 1px solid rgb(205, 205, 205);">
+    <!-- Bio and Details -->
+    <div style="flex: 1; margin-left: 20px;">
+        <div>
             
             <!-- Name -->
             <h1><strong>{{ user.first_name }} {{ user.last_name }}</strong></h1>
@@ -26,14 +26,13 @@
             <p><span style="font-weight: bold;">Bio:</span> {{ user.profile.bio }}</p>
             
         </div>
-        <p style="text-align:center;"><a href="{% url 'profile_update' %}">Edit Profile</a></p>
+        <p style="text-align:center;"><a href="{% url 'profile_update' %}"><span class="material-symbols-outlined">edit</span></a></p>
     </div>
 
 </div>
 
 <!-- Art Header -->
-<h1
- style="text-align:center;">My Art {{ style.get_name_display }}</h1>
+<h1 style="text-align:center;">My Art {{ style.get_name_display }}</h1>
 <hr>
 
 <!-- Art Works Gallery -->
