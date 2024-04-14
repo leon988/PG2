@@ -1,14 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Delete Art</h1>
 
-<h4>Are you sure you want to delete <span class="teal-text">{{ object.title }}</span>?</h4>
+<h1>Hold up!</h1>
+<h5>Are you sure you want to permanently delete <span class="teal-text">{{ object.title }}</span>?</h5>
 
-<form action="" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Yes - Delete!" class="btn">
-    <a href="{% url 'arts_detail' object.id %}">Cancel</a>
-</form>
+<div class="center-align">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <br>
+        <button class="btn waves-effect waves-light red" type="submit" name="action">
+            Delete Forever
+            <i class="material-icons right">delete</i>
+        </button>
+        <a href="{% url 'arts_detail' object.id %}" class="btn waves-effect waves-light amber">
+            <i class="material-icons right">cancel</i>
+            Cancel
+        </a>
+    </form>
+</div>
+
 
 {% endblock %}

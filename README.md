@@ -18,7 +18,6 @@ Whether you're here to showcase your latest masterpiece, connect with fellow art
 
 See you on Page Two! 
 
-
 <div id="App Link" align="center">
 
 ### [PG²: Page Two](TODO: Link Goes Here)
@@ -94,7 +93,6 @@ Page Two is developed using Python, Django, and PostgreSQL featuring Django Auth
 ### Prerequisites
 - Ensure you have a modern web browser installed on your device, such as Google Chrome, Firefox, Safari, or Edge.
 - To access full CRUD capabilities, please be sure to sign up/log in to Page Two.
-
 
 ### Installation
 No installation required, however, internet access is necessary.
