@@ -7,20 +7,19 @@
 
 🎨 PG²: Page Two
 ============
-Page Two is more than a digital art gallery – we are a creative community of artists, enthusiasts, and everyone in between. Users can share, discover, and engage with a diverse range of artwork, empowering creativity and meaningful connections.
+We are more than a digital art gallery - we are the world's best community for artists of all skill levels to share, discover, and engage.
 
-### What sets up apart:
+### What sets up apart
 - **Creativity**: Our platform is for art of all mediums and styles. Page Two encourages artists to experiment, innovate, and share their unique perspectives with the world.
 - **Diversity**: Whether you're a seasoned professional or just starting out, Page Two welcomes artists of all backgrounds, styles, and skill levels.
 - **Community**: Users are able to leave comments, feedback, and likes to show support to our community.
 
+### Join the community
 Whether you're here to showcase your latest masterpiece, connect with fellow artists, or simply find inspiration, We invite you to join us on our creative journey. 
-
-See you on Page Two! 
 
 <div id="App Link" align="center">
 
-### [PG²: Page Two](TODO: Link Goes Here)
+### [See you on Page Two! ](TODO: Link Goes Here)
 
 </div>
 
@@ -29,6 +28,7 @@ See you on Page Two!
 ============
 The name 'R16' was inspired by the Zoom Room where our group was founded. At the heart (and the code!) of Page Two is a collective of programmers united by their shared passion for art and technology.
 
+This project is brought to you by Guerizim Leon, Ganesh Shrestha, and Paul Corpuz:
 <div id="Team Socials" align="center">
 
 Guerizim Leon:
