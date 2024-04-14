@@ -27,7 +27,7 @@ See you on Page Two!
 
 👩‍🎨👨‍🎨👨‍🎨 Meet the Team: R16
 ============
-The name ‘R16’ was inspired by the Zoom Room where our group was founded, and at the heart (and the code!) of Page Two is a collective of programmers united by their shared passion for art and technology.
+The name 'R16' was inspired by the Zoom Room where our group was founded. At the heart (and the code!) of Page Two is a collective of programmers united by their shared passion for art and technology.
 
 <div id="Team Socials" align="center">
 
@@ -104,6 +104,8 @@ No installation required, however, internet access is necessary.
 - [ ] Update Models to include more attributes.
 - [ ] Ability to search database for art, or by artist.
 - [ ] Ability to share on other social media platforms.
+- [ ] Connect to Cloud storage (like AWS S3) to store content.
+- [ ] Ability to incorporate audio/video content.
 
 
 ❤️ Acknowledgments

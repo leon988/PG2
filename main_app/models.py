@@ -98,7 +98,7 @@ class Style(models.Model):
 class Art(models.Model):
     title = models.CharField(max_length=75)
     image = models.CharField(max_length=500)
-    date = models.DateField('Art Creation Date', default=now)
+    date = models.DateField('Creation/Performance Date', default=now)
     price = models.DecimalField('Valuation', max_digits=1000, decimal_places=2)
     style = models.ManyToManyField(Style)
     medium = models.ForeignKey(Medium, on_delete=models.PROTECT)

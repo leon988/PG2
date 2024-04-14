@@ -2,39 +2,47 @@
 {% block content %}
 
 
-<!-- Update -->
-{% if object %}
-<h1>Edit <span class="teal-text">{{object.title}}</span> Details</h1>
-<!-- Create -->
-{% else %}
-<h1>Add your Art</h1>
-<h5>Showcase your talent and invite comments, feedback, and appreciation from the community!</h5>
-{% endif %}
+
 
 <!-- Leaving the action empty makes the form post to the same url used to display it -->
 <div class="row">
     <div class="col s12">
         <div class="card white white-opacity">
             <div class="card-content">
+                <!-- Update -->
+                {% if object %}
+                <h1>Update <span class="teal-text">{{object.title}}</span></h1>
+                <h5>Feel free to add last minute touch ups~</h5>
+                <!-- Create -->
+                {% else %}
+                <h1>Add your <span class="teal-text">Art</span></h1>
+                <h5>Showcase your talent and invite comments, feedback, and appreciation from the community!</h5>
+                {% endif %}
+
                 <form action="" method="post">
                     {% csrf_token %}
                     <table>
                         {{ form.as_table }}
                     </table>
                     <div class="center-align">
-                    <br>
-                        <button class="btn waves-effect waves-light" type="submit" name="action">
-                            Submit
-                            <i class="material-icons right">add_circle</i>
-                        </button>
-                        {% if object %}
-                        <a href="{% url 'arts_detail' object.id %}" class="btn waves-effect waves-light amber">
-                            <i class="material-icons right">cancel</i>
-                            Cancel
-                        </a>
-                        {% endif %}
+                        <br>
+                        <div class="row">
+                            <div class="right-align">
+                                {% if object %}
+                                <a href="{% url 'arts_detail' object.id %}" class="btn waves-effect waves-light amber">
+                                    <i class="material-icons left">cancel</i>
+                                    Cancel
+                                </a>
+                                {% endif %}
+                                <button class="btn waves-effect waves-light" type="submit" name="action">
+                                    Update
+                                    <i class="material-icons left">add_circle</i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </form>
+                <br>
             </div>
         </div>
     </div>
