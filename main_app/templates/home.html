@@ -2,8 +2,23 @@
 {% block content %}
 
 <div class="home">
-    <h1>Welcome to PG²</h1>
-    <p>A community platform for showcasing and discovering creative work</p>
+    <h1 class="h1">Welcome to Page Two</h1>
+    <h5 class="h5">Discover, share, and inspire with our creative community built around you.</h5>
 </div>
 
+<div class="carousel">
+    <a class="carousel-item" href="#one!"><img src="https://news.artnet.com/app/news-upload/2014/07/Johannes_Vermeer_1632-1675_-_The_Girl_With_The_Pearl_Earring_1665-e1435072137333.jpg"></a>
+    <a class="carousel-item" href="#two!"><img src="https://www.1st-art-gallery.com/media/catalog/product/cache/a67918ceb14cd34227a9a3ea0f98d29a/paintingsL/45790/starry-night-over-the-rhone-re.webp"></a>
+    <a class="carousel-item" href="#three!"><img src="https://cdn.shopify.com/s/files/1/0047/4231/6066/files/mona_liza_800x.jpg"></a>
+    <a class="carousel-item" href="#four!"><img src="https://cdn.shopify.com/s/files/1/0047/4231/6066/files/The_Birth_of_Venus_by_Sandro_Botticelli_800x.jpg"></a>
+    <a class="carousel-item" href="#five!"><img src="https://fs.artdevivre.com/storage/articles/events-article/a-monet/fd4a2b62395c7281b28501fdc14421d6.jpg"></a>
+  </div>
+
+  <!-- Materialize JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.carousel');
+      var instances = M.Carousel.init(elems);
+    });
+  </script>
 {% endblock %}
