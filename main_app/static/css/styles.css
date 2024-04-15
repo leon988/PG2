@@ -258,7 +258,7 @@ h1 .medium-name, h1 .style-name  {
 .profile-image img {
   width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .bio-details {
@@ -283,4 +283,8 @@ h1 .medium-name, h1 .style-name  {
   color: gray;
 }
 
-
+.likes {
+  display: flex;        
+  align-items: center;  /* Vertically centers the flex items */
+  justify-content: flex-end; /* Aligns the flex items to the right */
+}
