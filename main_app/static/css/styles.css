@@ -109,6 +109,7 @@ footer.page-footer {
   text-align: right;
   background-color:rgb(232, 244, 61); 
   color: #000000;
+  margin-bottom: 0;
 }
 
 /* Art List */
@@ -128,7 +129,7 @@ footer.page-footer {
   border: 1px solid #ccc;
   border-radius: 5px;
   overflow: hidden;
-  position: relative; 
+  position: relative;
 }
 
 .image-wrapper {
