@@ -6,7 +6,7 @@
     <div class="col s12">
         <div class="card white white-opacity">
             <div class="card-content">
-                <h1>Update your <span class="teal-text">Comment</span></h1>
+                <h1>Update your <span class="grey-text text-darken-1">Comment</span></h1>
                 <h5>Be cool! Post encouraging comments, feedback, or appreciation!</h5>
                 <form method="post" action="{% url 'comments_update' pk=comment.id %}">
                     {% csrf_token %}

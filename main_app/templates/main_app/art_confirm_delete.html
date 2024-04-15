@@ -5,7 +5,7 @@
     <div class="col s12">
         <div class="card white white-opacity">
             <div class="card-content">
-                <h1>Delete <span class="teal-text">{{ object.title }}</span>?</h1>
+                <h1>Delete <span class="grey-text text-darken-1">{{ object.title }}</span>?</h1>
                 <h5>You will permanently delete {{ object.title }} from Page Two.</h5>
                 <!-- Cancel and Confirm buttons -->
                 <br>
@@ -13,11 +13,11 @@
                     <div class="right-align">
                         <form action="" method="POST">
                             {% csrf_token %}
-                            <a href="{% url 'arts_detail' object.id %}" class="btn waves-effect waves-light amber">
+                            <a href="{% url 'arts_detail' object.id %}" class="btn waves-effect waves-light grey">
                                 <i class="material-icons left">cancel</i>
                                 Cancel
                             </a>
-                            <button class="btn waves-effect waves-light red" type="submit" name="action">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">
                                 Delete
                                 <i class="material-icons left">delete</i>
                             </button>

@@ -38,8 +38,8 @@
                     <li><a href="{% url 'index' %}">View Art</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'arts_create' %}">Add Art</a></li>
-                        <li><a href="{% url 'styles_index' %}">Art by Styles</a></li>
-                        <li><a href="{% url 'mediums_index' %}">Art by Mediums</a></li>
+                        <li><a href="{% url 'styles_index' %}">Art by Style</a></li>
+                        <li><a href="{% url 'mediums_index' %}">Art by Medium</a></li>
                         <li><a href="{% url 'profile_detail' %}">
                             <i class="material-icons" style="font-size:3rem">account_circle</i>
                         </a></li>
@@ -51,7 +51,12 @@
                         </li>
                         {% else %}
                         <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                        <li><a href="{% url 'login' %}">Log In</a></li>
+                        <li>
+                            <form action="{% url 'login' %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn">Log In</button>
+                            </form>
+                        </li>
                         {% endif %}
                     </ul>
             </div>

@@ -16,6 +16,14 @@ body, html {
   min-width: 100%;
 }
 
+.btn{
+  background-color: #994A75;
+}
+
+.btn:hover{
+  background-color: #a2a2a2;
+}
+
 .carousel {
   position: relative;
   top: -20px;
@@ -187,7 +195,7 @@ footer.page-footer {
 }
 
  .title:hover {
-  background-color: rgba(255, 0, 0, 0.8); /* New background color on hover */
+  background-color: rgb(232, 244, 61);
 }
 
 .art-image {
