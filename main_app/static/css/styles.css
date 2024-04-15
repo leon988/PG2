@@ -17,11 +17,18 @@ body, html {
 }
 
 .carousel {
-  height: 80vh;
+  position: relative;
+  top: -20px;
+  margin-top: 0;
+  height: 60vh;
 }
 
 .carousel-item img {
   max-height: 400px; 
+}
+
+.parent-element{
+  padding: 10px 0;
 }
 
 .home {
@@ -30,7 +37,7 @@ body, html {
 }
 
 .home h1 {
-  font-size: 2em;
+  font-size: 4em;
 }
 
 .home p {
