@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col s6">
         <!-- Image on top left -->
-        <img src="{{ art.image }}" alt="{{ art.title }}" class="art-image" width="100%" height="auto">
+        <img src="{{ art.image }}" alt="{{ art.title }}" class="art-image" width="100%" height="auto" style="border-radius: 8px;" >
     </div>
     <div class="col s6">
         <!-- Art title as header on top right -->
@@ -13,7 +13,6 @@
             <div>
                 <p><span style="font-weight: bold;">Artist:</span> {{ user.first_name }} {{ user.last_name }}</p>
                 <p><span style="font-weight: bold;">Description:</span> {{ art.description|linebreaks }}</p>
-                <hr>
                 <p><span style="font-weight: bold;">Date Created:</span> {{ art.date }}</p>
                 <p><span style="font-weight: bold;">Valuation:</span> ${{ art.price }}</p>
                 <p><span style="font-weight: bold;">Style:</span>
@@ -25,13 +24,13 @@
                 <p><span style="font-weight: bold;">Likes:</span> {{ art.like }}</p>
             </div>
             <div>
-                <a href="{% url 'increment_likes' art.id %}" style="margin-right: 10px;">
+                <a href="{% url 'increment_likes' art.id %}" style="margin-right: 10px; color: orange;">
                     <span class="material-symbols-outlined">heart_plus</span>
                 </a>
-                <a href="{% url 'arts_update' art.id %}" style="margin-right: 10px;">
+                <a href="{% url 'arts_update' art.id %}" style="margin-right: 10px; color: gray;"">
                     <span class="material-symbols-outlined">edit</span>
                 </a>
-                <a href="{% url 'arts_delete' art.id %}" style="color: red;">
+                <a href="{% url 'arts_delete' art.id %}" style="color: orangered;">
                     <span class="material-symbols-outlined">delete</span>
                 </a>
             </div>
@@ -46,7 +45,7 @@
     <h2>New Comment</h2>
     <form action="{% url 'comments_create' art.pk %}" method="POST">
         {% csrf_token %}
-        <textarea name="comment" cols="40" rows="5" required></textarea>
+        <textarea name="comment" cols="40" rows="5" required placeholder="Add a new comment..."></textarea>
         <button type="submit">Post Comment</button>
     </form>
 {% else %}
@@ -62,18 +61,18 @@
                 <img src="{{ comment.user.profile.profile_pic }}" alt="Profile Picture" style="width: 50px; height: 50px; border-radius: 50%;">
             </div>
             <div class="comment-content" style="flex-grow: 1; margin-left: 20px;">
-                <p><strong>{{ comment.user.first_name }} {{ comment.user.last_name }}</strong></p>
+                <p><span style="font-weight: bold;">{{ comment.user.first_name }} {{ comment.user.last_name }}</span></p>
                 <p>{{ comment.comment }}</p>
                 <p>{{ comment.date }}</p>
             </div>
             <!-- Comment Actions: Update, Delete  -->
             <div class="comment-actions">
-                <a href="{% url 'comments_update' comment.pk %}" style="margin-right: 10px;">
+                <a href="{% url 'comments_update' comment.pk %}" style="color: gray;">
                     <span class="material-symbols-outlined">edit</span>
                 </a>
-                <a href="{% url 'comments_delete' comment.pk %}" style="color: red;">
+                <a href="{% url 'comments_delete' comment.pk %}" style="color: orangered;">
                     <span class="material-symbols-outlined">delete</span>
-                </a>                
+                </a>
             </div>
         </div>
     {% empty %}
@@ -82,4 +81,3 @@
 </div>
 
 {% endblock %}
-

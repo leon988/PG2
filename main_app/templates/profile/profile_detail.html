@@ -1,47 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<!-- Profile Section -->
-<div style="display: flex; align-items: flex-start; justify-content: start; margin-bottom: 20px;">
-
+<div class="profile-detail">
     <!-- Profile Image -->
-    <div style="flex: 0 0 200px; padding: 10px;">
-        <img src="{{ user.profile.profile_pic }}" alt="Profile of {{ user.username }}" style="width:100%; height:auto; border-radius: 10px;">
+    <div class="col s6 profile-image">
+        <img src="{{ user.profile.profile_pic }}" alt="Profile of {{ user.username }}">
     </div>
 
     <!-- Bio and Details -->
-    <div style="flex: 1; margin-left: 20px;">
-        <div>
-            
-            <!-- Name -->
-            <h1><strong>{{ user.first_name }} {{ user.last_name }}</strong></h1>
-
-            <!-- Username -->
-            <p><span style="font-weight: bold;">Username:</span> {{ user.username }}</p>
-
-            <!-- Location -->
-            <p><span style="font-weight: bold;">Location:</span> {{ user.profile.location }}</p>
-
-            <!-- Bio -->
-            <p><span style="font-weight: bold;">Bio:</span> {{ user.profile.bio }}</p>
-            
-        </div>
-        <p style="text-align:center;"><a href="{% url 'profile_update' %}"><span class="material-symbols-outlined">edit</span></a></p>
+    <div class="col s6 bio-details">
+        <h1><strong>{{ user.first_name }} {{ user.last_name }}</strong></h1>
+        <p><span class="bold-text">Username:</span> {{ user.username }}</p>
+        <p><span class="bold-text">Location:</span> {{ user.profile.location }}</p>
+        <p><span class="bold-text">Bio:</span> {{ user.profile.bio }}</p>
+        <p class="edit-link"><a href="{% url 'profile_update' %}"><span class="material-symbols-outlined">edit</span></a></p>
     </div>
+</div> 
 
-</div>
-
-<!-- Art Header -->
-<h1 style="text-align:center;">My Art {{ style.get_name_display }}</h1>
+<h1 style="text-align:center;">My Art</h1>
 <hr>
 
 <!-- Art Works Gallery -->
-<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
-{% for art in user.art_set.all %}
-    <a href="{% url 'arts_detail' art.id %}" class="card-link" style="width: 30%; margin: 10px; display: block;">
-        <img src="{{ art.image }}" alt="{{ art.title }}" style="width: 100%; height:auto;">
-    </a>
-{% endfor %}
+<div class="card-grid">
+    {% for art in user.art_set.all %}
+        <div class="cards">
+            <a href="{% url 'arts_detail' art.id %}">
+                <div class="image-wrapper">
+                    <img src="{{ art.image }}" alt="{{ art.title }}">
+                    <div class="overlay">
+                        <span class="card-title">{{ art.title }}</span>
+                    </div>
+                </div>
+            </a>
+            <div class="card-content">
+                <div class="likes">
+                    Likes: {{ art.like }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 </div>
 
 {% endblock %}
