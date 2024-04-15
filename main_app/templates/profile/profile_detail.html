@@ -10,7 +10,7 @@
     <!-- Bio and Details -->
     <div class="col s6 bio-details">
         <h1><strong>{{ user.first_name }} {{ user.last_name }}</strong>
-            <a href="{% url 'profile_update' %}"><i class="material-icons">create</i></a></h1> 
+            <a href="{% url 'profile_update' %}"><i class="small material-icons" style="margin-right: 10px; color: grey;">create</i></a></h1> 
         <p><span class="bold-text">Username:</span> {{ user.username }}</p>
         <p><span class="bold-text">Location:</span> {{ user.profile.location }}</p>
         <p><span class="bold-text">Bio:</span> {{ user.profile.bio }}</p>
