@@ -8,48 +8,67 @@ from django.conf import settings
 
 
 MEDIUM = (
-    ('DIG','Digital'),
-    ('MUR','Mural'),
-    ('H2O', 'Water Color'),
-    ('PAST', 'Pastel'),
-    ('CRY', 'Acrylic'),
-    ('OIL', 'Oil'),
-    ('INK', 'Ink'),
-    ('PRI','Print Making'),
-    ('CHA','Charcoal'),
-    ('PHO', 'Photography'),
-    ('SCU', 'Sculpture'),
-    ('MIX', 'Mixed Media'),
-    ('COL', 'Collage'),
-    ('DRAW', 'Drawing'),
-    ('TXT', 'Textile Art'),
-    ('CER', 'Ceramics'),
-    ('PERM', 'Performance Art'),
-    ('INST', 'Installation Art'),
-    ('GLASS', 'Glass Art'),
-    ('MTL', 'Metal Work'),
-    ('LEAT', 'Leather Work'),
-    ('PEP', 'Paper Art / Origami'),
-    ('MOS', 'Mosaic'),
+    ('ACR', 'Acrylic'),
     ('BOD', 'Body Art / Tattoo'),
+    ('CER', 'Ceramics'),
+    ('CHA', 'Charcoal'),
+    ('COL', 'Collage'),
+    ('DIG', 'Digital Art'),
+    ('DRW', 'Drawing'),
+    ('GLS', 'Glass Art'),
+    ('H2O', 'Water Color'),
+    ('INK', 'Ink / Sumi-e'),
+    ('INS', 'Installation Art'),
+    ('LTR', 'Leather Work'),
+    ('MIX', 'Mixed Media'),
+    ('MOS', 'Mosaic'),
+    ('MUR', 'Mural / Graffiti'),
+    ('MTL', 'Metal Work'),
+    ('OIL', 'Oil Painting'),
+    ('PAP', 'Paper Art / Origami'),
+    ('PAS', 'Pastel'),
+    ('PERF', 'Performance Art'),
+    ('PHO', 'Photography'),
+    ('PRI', 'Print Making'),
     ('SND', 'Sound Art / Music'),
+    ('SCU', 'Sculpture'),
+    ('TXT', 'Textile Art / Fiber Arts'),
+    ('TYP', 'Typography'),
     ('OTH', 'Other')
 )
 
 STYLES = (
-    ('IMP','Impressionism'),
-    ('CUB','Cubism'),
-    ('SUR', 'Surrealism'),
-    ('REA', 'Realism'),
-    ('ABS','Abstract'),
-    ('ROM', 'Romanticism'),
+    ('ABS', 'Abstract'),
     ('ART', 'Art Nouveau'),
-    ('POP', 'Pop Art'),
-    ('POS','Post Modernism'),
-    ('MIN', 'Minimalism'),
+    ('BOT', 'Botanical'),
+    ('CLA', 'Classical'),
     ('CON', 'Contemporary'),
+    ('CON', 'Contemporary'),
+    ('CUB', 'Cubism'),
+    ('EXP', 'Experimental'),
+    ('FOL', 'Paper Folding / Papercraft'),
+    ('IMP', 'Impressionism'),
+    ('KNI', 'Knit / Crochet'),
+    ('MIN', 'Minimalism'),
+    ('MUS', 'Music'),
+    ('NAR', 'Narrative'),
+    ('PIX', 'Pixel Art'),
+    ('POP', 'Pop Art'),
+    ('POR', 'Portrait'),
+    ('POR', 'Porcelain / Stoneware'),
+    ('POS', 'Post Modernism'),
+    ('REA', 'Realism'),
+    ('ROM', 'Romanticism'),
+    ('SKE', 'Sketch'),
+    ('SOU', 'Interactive Sound Installation'),
+    ('STR', 'Street Art'),
+    ('SUR', 'Surrealism'),
+    ('THE', 'Theatrical'),
     ('THA', 'Thangka'),
-    ('OTH', 'Other')
+    ('TOO', 'Tattoo / Henna'),
+    ('QUI', 'Quilting / Weaving'),
+    ('VIN', 'Vintage'),
+    ('OTH', 'Other'),
 )
 
 
@@ -79,7 +98,7 @@ class Style(models.Model):
 class Art(models.Model):
     title = models.CharField(max_length=75)
     image = models.CharField(max_length=500)
-    date = models.DateField('Art Creation Date', default=now)
+    date = models.DateField('Creation/Performance Date', default=now)
     price = models.DecimalField('Valuation', max_digits=1000, decimal_places=2)
     style = models.ManyToManyField(Style)
     medium = models.ForeignKey(Medium, on_delete=models.PROTECT)
@@ -88,7 +107,7 @@ class Art(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.title} ({self.id})'
+        return f'Title: {self.title} | User: {self.user.username} | ID: {self.id}'
 
     def get_absolute_url(self):
         return reverse('arts_detail', kwargs={'pk': self.id})
@@ -103,7 +122,7 @@ class Comment(models.Model):
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE, blank=True, null=True)   
 
     def __str__(self):
-        return f'Comment by {self.user.username} on {self.date}'
+        return f'Comment: {self.comment} | User: {self.user.username} | Date: {self.date}'
     
     def get_absolute_url(self):
         return reverse('comments_detail', kwargs={'pk': self.id})
@@ -118,3 +137,6 @@ class Profile(models.Model):
     profile_pic = models.CharField(max_length=500, blank=True, null=True)
     bio = models.TextField(max_length=280)
     location = models.CharField(max_length=50, blank=True)
+
+    def __str__(self):
+        return f'User: {self.user} | ID: {self.id}'

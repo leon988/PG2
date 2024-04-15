@@ -5,7 +5,6 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.utils import timezone
 from django.urls import reverse_lazy
 from .models import Art, Style, Medium, Comment, Profile
 from .forms import UserForm, ProfileForm, CommentForm, ArtForm
@@ -33,6 +32,9 @@ class ArtCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+# super() function is used to refer to the parent class 
+# it allows you to call methods defined in the superclass/parent from the subclass enables you to extend and customize the functionality inherited from the parent class.
+# This ensures that the user field of the Art model is populated with the current user before saving the form.
 
 class ArtUpdate(LoginRequiredMixin, UpdateView):
     model = Art
@@ -42,18 +44,20 @@ class ArtDelete(LoginRequiredMixin, DeleteView):
     model = Art
     success_url= '/art'
 
+@login_required
 def increment_likes(request, art_id):
     art = get_object_or_404(Art, pk=art_id)
     art.like += 1
     art.save()
     return redirect('arts_detail', pk=art_id)
-
+# Django shortcut function used to retrieve an object, but if not found, 404 error
+# Error handling, checks if Art object with the PK exists in the database before proceeding
 
 # Model 2: Style
 class StyleList(ListView):
     model = Style
 
-class StyleDetail(LoginRequiredMixin, DetailView):
+class StyleDetail(DetailView):
     model = Style
     template_name = 'main_app/style_detail.html'
 
@@ -62,21 +66,14 @@ class StyleDetail(LoginRequiredMixin, DetailView):
         style = self.get_object()
         context['artworks'] = Art.objects.filter(style=style)  
         return context
-
-class StyleUpdate(LoginRequiredMixin, UpdateView):
-    model = Style
-    fields = '__all__'
-
-class StyleDelete(LoginRequiredMixin, DeleteView):
-    model = Style
-    success_url = '/style'
+#  provide additional data to the template context beyond default, so we can access artworks in template
 
 
 # Model 3: Medium
 class MediumList(ListView):
     model = Medium
 
-class MediumDetail(LoginRequiredMixin, DetailView):
+class MediumDetail(DetailView):
     model = Medium
     template_name = 'main_app/medium_detail.html'  
 
@@ -86,22 +83,8 @@ class MediumDetail(LoginRequiredMixin, DetailView):
         context['artworks'] = Art.objects.filter(medium=medium)  
         return context
 
-class MediumUpdate(LoginRequiredMixin, UpdateView):
-    model = Medium
-    fields = '__all__'
-
-class MediumDelete(LoginRequiredMixin, DeleteView):
-    model = Medium
-    success_url = '/medium'
-
 
 # Model 4: Comment
-class CommentList(ListView):
-    model = Comment
-
-class CommentDetail(DetailView):
-    model = Comment
-    
 class CommentCreate(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentForm
@@ -136,28 +119,12 @@ class CommentDelete(LoginRequiredMixin, DeleteView):
     model = Comment
 
     def get_success_url(self):
-        return reverse_lazy('arts_detail', kwargs={'pk':self.object.art.pk})
+        return reverse_lazy('arts_detail', kwargs={'pk': self.object.art.pk})
+# reverse_lazy is a Django function similar to reverse, but it evaluates at a later time when it's needed
+# After deleting the comment the user will be redirected to the detail view where deleted comment belonged.
 
 
-# Django Authentication - Sign Up
-def signup(request):
-    error_message = ''
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            # profile_user = form.save(commit=False)
-            # profile.user = profile_user
-            user = form.save()
-            login(request, user)
-            return redirect('index')
-        else:
-            error_message = 'Invalid sign up - try again'
-    form = UserCreationForm()
-    context = {'form': form, 'error_message': error_message}
-    return render(request, 'registration/signup.html', context)
-
-
-# Model 5: Profile - we did it!
+# Model 5: Profile
 @login_required
 def user_profile(request):
     user = request.user
@@ -175,7 +142,7 @@ def profile(request):
             profile_form.save()
             return redirect('profile_detail')
         else:
-            error_message = 'Invalid form submission - try again'
+            error_message = 'Invalid form submission - please try again'
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=profile)
@@ -183,7 +150,58 @@ def profile(request):
     return render(request, 'profile/profile_form.html', context)
 
 
+# Django Authentication - Sign Up
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+        else:
+            error_message = 'Invalid sign up - please try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)
 
 
+
+
+
+# -----
+# ref: Class Based Views -- https://ccbv.co.uk/
+# ref: get_object_or_404 -- https://www.sankalpcjonna.com/learn-django/use-get-object-or-404-in-django-to-write-lesser-code
 # ref: https://www.geeksforgeeks.org/get_object_or_404-method-in-django-models/
-# ref: https://stackoverflow.com/questions/4101258/how-do-i-add-a-placeholder-on-a-charfield-in-django
+# ref: super() -- https://www.geeksforgeeks.org/python-super/#
+# ref: reverse_lazy() -- https://forum.djangoproject.com/t/understanding-reverse-and-reverse-lazy/22951
+# ref: adding extra context -- https://docs.djangoproject.com/en/5.0/topics/class-based-views/generic-display/
+
+
+# -----
+# Model 2: Style
+# class StyleUpdate(LoginRequiredMixin, UpdateView):
+#     model = Style
+#     fields = '__all__'
+
+# class StyleDelete(LoginRequiredMixin, DeleteView):
+#     model = Style
+#     success_url = '/style'
+
+
+# Model 3: Medium
+# class MediumUpdate(LoginRequiredMixin, UpdateView):
+#     model = Medium
+#     fields = '__all__'
+
+# class MediumDelete(LoginRequiredMixin, DeleteView):
+#     model = Medium
+#     success_url = '/medium'
+
+
+# Model 4: Comment
+# class CommentList(ListView):
+#     model = Comment
+
+# class CommentDetail(DetailView):
+#     model = Comment
