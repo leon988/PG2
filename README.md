@@ -24,7 +24,7 @@ Whether you're here to showcase your latest masterpiece, connect with fellow art
 </div>
 
 
-👩‍🎨👨‍🎨👨‍🎨 Meet the Team: R16
+👩🏻‍🎨👨🏽‍🎨👨🏽‍🎨 Meet the Team: R16
 ============
 The name 'R16' was inspired by the Zoom Room where our group was founded. At the heart (and the code!) of Page Two is a collective of programmers united by their shared passion for art and technology.
 
