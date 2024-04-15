@@ -3,7 +3,6 @@
 
 <h1>Style <span class="style-name">{{ style.get_name_display }}</span></h1>
 
-
 <div class="card-grid">
     {% for art in artworks %}
     <div class="cards">
@@ -16,10 +15,15 @@
             </div>
         </a>
         <div class="card-content">
-            <div class="likes"><i class="material-icons">favorite_border</i> {{ art.like }}
+            <div class="likes">
+                <span class="material-symbols-outlined right">
+                    favorite
+                </span>
+                {{ art.like }}
             </div>
-            <!-- <p>{{ art.description|truncatechars:100 }}</p> -->
         </div>
+                    <!-- <p>{{ art.description|truncatechars:100 }}</p> -->
+
     </div>
     {% empty %}
     <p>No artworks found under this style.</p>

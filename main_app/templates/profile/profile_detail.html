@@ -9,16 +9,17 @@
 
     <!-- Bio and Details -->
     <div class="col s6 bio-details">
-        <h1><strong>{{ user.first_name }} {{ user.last_name }}</strong></h1>
+        <h1><strong>{{ user.first_name }} {{ user.last_name }}</strong>
+            <a href="{% url 'profile_update' %}"><i class="material-icons">create</i></a></h1> 
         <p><span class="bold-text">Username:</span> {{ user.username }}</p>
         <p><span class="bold-text">Location:</span> {{ user.profile.location }}</p>
         <p><span class="bold-text">Bio:</span> {{ user.profile.bio }}</p>
-        <p class="edit-link"><a href="{% url 'profile_update' %}"><span class="material-symbols-outlined">edit</span></a></p>
     </div>
 </div> 
 
-<h1 style="text-align:center;">My Art</h1>
+<h1 style="text-align:center;">My <span class="grey-text text-darken-1">Art</span></h1>
 <hr>
+<br>
 
 <!-- Art Works Gallery -->
 <div class="card-grid">
@@ -34,7 +35,9 @@
             </a>
             <div class="card-content">
                 <div class="likes">
-                    Likes: {{ art.like }}
+                    <span class="material-symbols-outlined right">
+                        favorite
+                    </span> {{ art.like }}
                 </div>
             </div>
         </div>

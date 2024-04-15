@@ -3,7 +3,6 @@
 
 <h1>Medium <span class="medium-name">{{ medium.get_name_display }}</span></h1>
 
-
 <div class="card-grid">
     {% for art in artworks %}
     <div class="cards">
@@ -16,12 +15,11 @@
             </div>
         </a>
         <div class="card-content">
-            <div class="content-flex">
-                <!-- <p class="art-description">{{ art.description|truncatechars:100 }}</p> -->
-                <div class="likes">
-                    <i class="material-icons">favorite_border</i>
-                    <span class="like-count">{{ art.like }}</span>
-                </div>
+            <div class="likes">
+                <span class="material-symbols-outlined right">
+                    favorite
+                </span>
+                {{ art.like }}
             </div>
         </div>
     </div>

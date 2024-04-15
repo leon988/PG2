@@ -5,14 +5,28 @@
     <div class="col s6">
         <!-- Image on top left -->
         <img src="{{ art.image }}" alt="{{ art.title }}" class="art-image" width="100%" height="auto" style="border-radius: 8px;" >
+        <div class="right-align">
+            <br>
+            <a href="{% url 'increment_likes' art.id %}" style="margin-right: 10px; color: #b75d8e;">
+            <i class="small material-icons">favorite</i>
+            </a>
+        </div>
+   
     </div>
     <div class="col s6">
         <!-- Art title as header on top right -->
-        <h1 class="art-title">{{ art.title }}</h1>
+        <h1 class="art-title">{{ art.title }}
+        <a href="{% url 'arts_update' art.id %}" style="margin-right: 10px; color: grey;"">
+            <i class="small material-icons">create</i>
+        </a>
+        <a href="{% url 'arts_delete' art.id %}" style="color: grey;">
+            <i class="small material-icons">delete_forever</i>
+        </a>
+        </h1>
         <div>
             <div>
                 <p><span style="font-weight: bold;">Artist:</span> {{ user.first_name }} {{ user.last_name }}</p>
-                <p><span style="font-weight: bold;">Description:</span> {{ art.description|linebreaks }}</p>
+                <p><span style="font-weight: bold;">Description:</span> {{ art.description }}</p>
                 <p><span style="font-weight: bold;">Date Created:</span> {{ art.date }}</p>
                 <p><span style="font-weight: bold;">Valuation:</span> ${{ art.price }}</p>
                 <p><span style="font-weight: bold;">Style:</span>
@@ -23,31 +37,28 @@
                 <p><span style="font-weight: bold;">Medium:</span> {{ art.medium }}</p>
                 <p><span style="font-weight: bold;">Likes:</span> {{ art.like }}</p>
             </div>
-            <div>
-                <a href="{% url 'increment_likes' art.id %}" style="margin-right: 10px; color: orange;">
-                    <span class="material-symbols-outlined">heart_plus</span>
-                </a>
-                <a href="{% url 'arts_update' art.id %}" style="margin-right: 10px; color: gray;"">
-                    <span class="material-symbols-outlined">edit</span>
-                </a>
-                <a href="{% url 'arts_delete' art.id %}" style="color: orangered;">
-                    <span class="material-symbols-outlined">delete</span>
-                </a>
-            </div>
         </div>
     </div>
 </div>
 
-<hr>
 
 <!-- Add Comment -->
+
+<div class="col s12">
+    <div class="card white white-opacity">
+        <div class="card-content">
 {% if user.is_authenticated %}
-    <h2>New Comment</h2>
+    <h2>Add <span class="grey-text text-darken-1">Comment</span></h2>
     <form action="{% url 'comments_create' art.pk %}" method="POST">
         {% csrf_token %}
         <textarea name="comment" cols="40" rows="5" required placeholder="Add a new comment..."></textarea>
-        <button type="submit">Post Comment</button>
+        <div class="right-align">
+        <button class="btn waves-effect waves-light" type="submit" name="action">
+            Post Comment
+            <i class="material-icons left">add_circle</i>
+        </button>
     </form>
+    </div>
 {% else %}
     <p><a href="{% url 'login' %}">Log in</a> to post comments.</p>
 {% endif %}
@@ -68,12 +79,13 @@
             <!-- Comment Actions: Update, Delete  -->
             <div class="comment-actions">
                 <a href="{% url 'comments_update' comment.pk %}" style="color: gray;">
-                    <span class="material-symbols-outlined">edit</span>
+                    <i class="small material-icons">create</i>
                 </a>
-                <a href="{% url 'comments_delete' comment.pk %}" style="color: orangered;">
-                    <span class="material-symbols-outlined">delete</span>
+                <a href="{% url 'comments_delete' comment.pk %}" style="color: grey;">
+                    <i class="small material-icons">delete_forever</i>
                 </a>
             </div>
+            <br>
         </div>
     {% empty %}
         <p>No comments yet!</p>
