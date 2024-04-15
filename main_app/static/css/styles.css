@@ -12,6 +12,8 @@ body, html {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
+  min-width: 100%;
 }
 
 .home {
@@ -42,7 +44,6 @@ nav {
 main {
   flex: 1 0 auto;
   padding: 20px; 
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 footer.page-footer {
@@ -174,4 +175,53 @@ footer.page-footer {
 
 .comment-actions {
   margin-left: 20px; /* Optional space between content and actions */
+}
+
+h1 .medium-name, h1 .style-name  {
+  color: grey; 
+}
+
+/* Profile Detail Layout */
+.profile-detail {
+  display: flex;
+  align-items: start; /* Aligns items to the start of the flex container */
+  justify-content: start;
+  margin-bottom: 20px;
+}
+
+.col.s6 {
+  width: 50%; /* Sets the width to half of the container for both the image and bio */
+}
+
+.profile-image {
+  flex: 0 0 200px;
+  padding: 10px;
+}
+
+.profile-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.bio-details {
+  flex: 1;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.edit-link {
+  text-align: center;
+  margin-top: auto;
+}
+
+.edit-link a {
+  color: gray;
 }

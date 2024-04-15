@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Style: {{ style.get_name_display }}</h1>
+<h1>Style <span class="style-name">{{ style.get_name_display }}</span></h1>
+
 
 <div class="card-grid">
     {% for art in artworks %}
@@ -15,9 +16,9 @@
             </div>
         </a>
         <div class="card-content">
-            <div class="likes"><span style="font-weight: bold;">Likes:</span> {{ art.like }}
+            <div class="likes"><i class="material-icons">favorite_border</i> {{ art.like }}
             </div>
-            <p><span style="font-weight: bold;">Title:</span> {{ art.description|truncatechars:100 }}</p>
+            <!-- <p>{{ art.description|truncatechars:100 }}</p> -->
         </div>
     </div>
     {% empty %}
