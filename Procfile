@@ -1,0 +1,1 @@
+web: gunicorn PG2.wsgi
