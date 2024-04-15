@@ -2,7 +2,7 @@ body, html {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
   background: 
     linear-gradient(rgba(215, 214, 214, 0.2) 1px, transparent 1px),
     linear-gradient(to right, rgba(215, 214, 214, 0.2) 1px, transparent 1px);
@@ -16,7 +16,15 @@ body, html {
   min-width: 100%;
 }
 
+.carousel {
+  height: 400px; 
+}
+.carousel-item img {
+  max-height: 400px; 
+}
+
 .home {
+  font-family: "Merriweather", serif;
   text-align: center;
 }
 
@@ -29,12 +37,20 @@ body, html {
 }
 
 nav {
-  background-color: rgb(0, 0, 0,0.2);
-  box-shadow: none; 
+  background: linear-gradient(to bottom, rgba(189, 192, 189, 0.9), rgba(0, 0, 0, 0)); /* Gradient background */
+  box-shadow: none;
 }
 
 .nav-wrapper {
   padding: 0 20px; 
+}
+
+nav ul a {
+  font-size: 1rem;
+  color: #928c8c;
+  display: block;
+  padding: 0 15px;
+  cursor: pointer;
 }
 
 .brand-logo img {
@@ -46,11 +62,36 @@ main {
   padding: 20px; 
 }
 
+.h1, h1 {
+  font-family: "Merriweather", serif;
+  font-size: 4em;
+}
+
+.h5{
+  font-family: "Inter", sans-serif;
+  font-size: 1.2em;
+}
+
+.h4{
+  font-family: "Merriweather", serif;
+  font-size: 2em;
+}
+
+.p, p{
+  font-family: "Inter", sans-serif;
+  font-size: 1.1em;
+}
+
+tbody{
+  font-family: "Inter", sans-serif;
+  font-size: 1.1em;
+}
+
 footer.page-footer {
   padding-top: 0;
   text-align: right;
-  background-color:black; 
-  color: #666;
+  background-color:rgb(232, 244, 61); 
+  color: #000000;
 }
 
 /* Art List */
@@ -58,6 +99,11 @@ footer.page-footer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
+}
+
+.cards .card-content {
+  padding: 10px;
+  background-color: white;
 }
 
 .cards {
@@ -110,17 +156,13 @@ footer.page-footer {
 .cards {
   border: 1px solid #ccc;
   border-radius: 5px;
-  overflow: hidden;
-}
-
-.cards .card-content {
-  padding: 10px;
 }
 
 .title {
   position: relative;
-  height: 50px; /* Adjust height as needed */
+  height: 50px; 
   overflow: hidden;
+  background-color: white;
 }
 
 .title .card-title {
@@ -130,18 +172,14 @@ footer.page-footer {
   transform: translate(-50%, -50%);
   font-size: 18px;
   font-weight: bold;
-  color: #fff; /* Text color */
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  padding: 5px 10px;
+  color: #000000; 
   border-radius: 5px;
-  opacity: 0; /* Initially hidden */
-  transition: opacity 0.3s ease; /* Smooth transition */
-}
-
-.title:hover .card-title {
   opacity: 1; 
 }
 
+ .title:hover {
+  background-color: rgba(255, 0, 0, 0.8); /* New background color on hover */
+}
 
 .art-image {
   vertical-align: top;
@@ -151,6 +189,7 @@ footer.page-footer {
   margin-top: 0;
 }
 
+/* Comment Section */
 
 .comment-container {
   display: flex;
@@ -160,7 +199,7 @@ footer.page-footer {
 
 .comment-avatar {
   flex-shrink: 0;
-  margin-right: 20px; /* Space between avatar and text */
+  margin-right: 20px; 
 }
 
 .comment-avatar img {
@@ -174,7 +213,7 @@ footer.page-footer {
 }
 
 .comment-actions {
-  margin-left: 20px; /* Optional space between content and actions */
+  margin-left: 20px;
 }
 
 h1 .medium-name, h1 .style-name  {
