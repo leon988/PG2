@@ -9,11 +9,11 @@
 
     <!-- Bio and Details -->
     <div class="col s6 bio-details">
-        <h1><strong>{{ user.first_name }} {{ user.last_name }}</strong></h1>
+        <h1><strong>{{ user.first_name }} {{ user.last_name }}</strong>
+            <a href="{% url 'profile_update' %}"><i class="material-icons">create</i></a></h1> 
         <p><span class="bold-text">Username:</span> {{ user.username }}</p>
         <p><span class="bold-text">Location:</span> {{ user.profile.location }}</p>
         <p><span class="bold-text">Bio:</span> {{ user.profile.bio }}</p>
-        <p class="edit-link"><a href="{% url 'profile_update' %}"><span class="material-symbols-outlined">edit</span></a></p>
     </div>
 </div> 
 
@@ -34,7 +34,10 @@
             </a>
             <div class="card-content">
                 <div class="likes">
-                    Likes: {{ art.like }}
+                    <span class="material-symbols-outlined right">
+                        favorite
+                    </span>
+                    {{ art.like }}
                 </div>
             </div>
         </div>
