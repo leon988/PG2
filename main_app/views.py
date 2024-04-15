@@ -68,14 +68,6 @@ class StyleDetail(DetailView):
         return context
 #  provide additional data to the template context beyond default, so we can access artworks in template
 
-# class StyleUpdate(LoginRequiredMixin, UpdateView):
-#     model = Style
-#     fields = '__all__'
-
-# class StyleDelete(LoginRequiredMixin, DeleteView):
-#     model = Style
-#     success_url = '/style'
-
 
 # Model 3: Medium
 class MediumList(ListView):
@@ -91,22 +83,8 @@ class MediumDetail(DetailView):
         context['artworks'] = Art.objects.filter(medium=medium)  
         return context
 
-# class MediumUpdate(LoginRequiredMixin, UpdateView):
-#     model = Medium
-#     fields = '__all__'
-
-# class MediumDelete(LoginRequiredMixin, DeleteView):
-#     model = Medium
-#     success_url = '/medium'
-
 
 # Model 4: Comment
-# class CommentList(ListView):
-#     model = Comment
-
-# class CommentDetail(DetailView):
-#     model = Comment
-
 class CommentCreate(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentForm
@@ -146,22 +124,6 @@ class CommentDelete(LoginRequiredMixin, DeleteView):
 # After deleting the comment the user will be redirected to the detail view where deleted comment belonged.
 
 
-# Django Authentication - Sign Up
-def signup(request):
-    error_message = ''
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('index')
-        else:
-            error_message = 'Invalid sign up - please try again'
-    form = UserCreationForm()
-    context = {'form': form, 'error_message': error_message}
-    return render(request, 'registration/signup.html', context)
-
-
 # Model 5: Profile
 @login_required
 def user_profile(request):
@@ -188,6 +150,24 @@ def profile(request):
     return render(request, 'profile/profile_form.html', context)
 
 
+# Django Authentication - Sign Up
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+        else:
+            error_message = 'Invalid sign up - please try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)
+
+
+
+
 
 # -----
 # ref: Class Based Views -- https://ccbv.co.uk/
@@ -196,3 +176,32 @@ def profile(request):
 # ref: super() -- https://www.geeksforgeeks.org/python-super/#
 # ref: reverse_lazy() -- https://forum.djangoproject.com/t/understanding-reverse-and-reverse-lazy/22951
 # ref: adding extra context -- https://docs.djangoproject.com/en/5.0/topics/class-based-views/generic-display/
+
+
+# -----
+# Model 2: Style
+# class StyleUpdate(LoginRequiredMixin, UpdateView):
+#     model = Style
+#     fields = '__all__'
+
+# class StyleDelete(LoginRequiredMixin, DeleteView):
+#     model = Style
+#     success_url = '/style'
+
+
+# Model 3: Medium
+# class MediumUpdate(LoginRequiredMixin, UpdateView):
+#     model = Medium
+#     fields = '__all__'
+
+# class MediumDelete(LoginRequiredMixin, DeleteView):
+#     model = Medium
+#     success_url = '/medium'
+
+
+# Model 4: Comment
+# class CommentList(ListView):
+#     model = Comment
+
+# class CommentDetail(DetailView):
+#     model = Comment

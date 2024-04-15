@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from .models import Profile, Comment, Art, Medium, Style
 
 
-# Model 1 - Profile
+# Model 1 - Art
 class ArtForm(forms.ModelForm):
     class Meta:
         model = Art
@@ -23,7 +23,7 @@ class ArtForm(forms.ModelForm):
 # this makes all available options from the Medium and Style models in the form
 
 
-# Model 4 - Profile
+# Model 4 - Comment
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
