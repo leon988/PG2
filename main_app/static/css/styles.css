@@ -17,8 +17,9 @@ body, html {
 }
 
 .carousel {
-  height: 400px; 
+  height: 80vh;
 }
+
 .carousel-item img {
   max-height: 400px; 
 }
@@ -54,7 +55,8 @@ nav ul a {
 }
 
 .brand-logo img {
-  margin-top: 5px; 
+  margin-top: 1px;
+  width: 55px;
 }
 
 main {

@@ -100,7 +100,7 @@ No installation required, however, internet access is necessary.
 
 ⏭️ Next Steps
 ============
-- [ ] Optimize for mobile screens.
+- [X] Optimize for mobile screens.
 - [ ] Update Models to include more attributes.
 - [ ] Ability to search database for art, or by artist.
 - [ ] Ability to share on other social media platforms.
