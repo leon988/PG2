@@ -15,17 +15,19 @@
     </div>
     <div class="col s6">
         <!-- Art title as header on top right -->
-        <h1 class="art-title">{{ art.title }}
+        <h1 class="art-title">{{ art.title }} 
+            {% if user.is_authenticated %}
         <a href="{% url 'arts_update' art.id %}" style="margin-right: 10px; color: grey;">
             <i class="small material-icons">create</i>
         </a>
         <a href="{% url 'arts_delete' art.id %}" style="color: grey;">
             <i class="small material-icons">delete_forever</i>
         </a>
+        {% endif %}
         </h1>
         <div>
             <div>
-                <p><span style="font-weight: bold;">Artist:</span> {{ user.first_name }} {{ user.last_name }}</p>
+                <p><span style="font-weight: bold;">Artist:</span> {{ art.user.first_name }} {{ art.user.last_name }}</p>
                 <p><span style="font-weight: bold;">Description:</span> {{ art.description }}</p>
                 <p><span style="font-weight: bold;">Date Created:</span> {{ art.date }}</p>
                 <p><span style="font-weight: bold;">Valuation:</span> ${{ art.price }}</p>
