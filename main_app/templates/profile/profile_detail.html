@@ -9,7 +9,7 @@
 
     <!-- Bio and Details -->
     <div class="col s6 bio-details">
-        <h1><strong>{{ user.first_name }} {{ user.last_name }}</strong>
+        <h1><strong>{{ user.first_name }} <span class="grey-text text-darken-1">{{ user.last_name }}</span></strong>
             <a href="{% url 'profile_update' %}"><i class="small material-icons" style="margin-right: 10px; color: grey;">create</i></a></h1> 
         <p><span class="bold-text">Username:</span> {{ user.username }}</p>
         <p><span class="bold-text">Location:</span> {{ user.profile.location }}</p>
@@ -17,7 +17,7 @@
     </div>
 </div> 
 
-<h1 style="text-align:center;">My <span class="grey-text text-darken-1">Art</span></h1>
+<h3 style="text-align:center;">My <span class="grey-text text-darken-1">Art</span></h3>
 <hr>
 <br>
 

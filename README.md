@@ -19,7 +19,7 @@ Whether you're here to showcase your latest masterpiece, connect with fellow art
 
 <div id="App Link" align="center">
 
-### [See you on Page Two! ](TODO: Link Goes Here)
+### [See you on Page Two!](https://page-two-33130444ddaf.herokuapp.com/)
 
 </div>
 
@@ -28,20 +28,20 @@ Whether you're here to showcase your latest masterpiece, connect with fellow art
 ============
 The name 'R16' was inspired by the Zoom Room where our group was founded. At the heart (and the code!) of Page Two is a collective of programmers united by their shared passion for art and technology.
 
-This project is brought to you by Guerizim Leon, Ganesh Shrestha, and Paul Corpuz:
+This project is brought to you by Paul Corpuz, Guerizim Leon, and Ganesh Shrestha:
 <div id="Team Socials" align="center">
 
-Guerizim Leon:
+**Paul Corpuz:**
+<a href='https://www.linkedin.com/in/paulcorpuzseattle/' target="_blank"><img alt='LinkedIn' src='https://img.shields.io/badge/Paul_Corpuz-100000?style=flat&logo=LinkedIn&logoColor=white&labelColor=0077b5&color=0077b5'/></a>
+<a href='https://github.com/paulcorpuz/' target="_blank"><img alt='GitHub' src='https://img.shields.io/badge/Paul_Corpuz-100000?style=flat&logo=GitHub&logoColor=white&labelColor=black&color=000000'/></a>
+
+**Guerizim Leon:**
 <a href='https://www.linkedin.com/in/gueri-leon/' target="_blank"><img alt='linkedin' src='https://img.shields.io/badge/Guerizim_Leon-100000?style=flat&logo=linkedin&logoColor=white&labelColor=0077b5&color=0077b5'/></a>
 <a href='https://github.com/leon988' target="_blank"><img alt='GitHub' src='https://img.shields.io/badge/Guerizim_Leon-100000?style=flat&logo=GitHub&logoColor=white&labelColor=black&color=black'/></a>
 
-Ganesh Shrestha:
+**Ganesh Shrestha:**
 <a href='https://www.linkedin.com/in/ganeshrestha/' target="_blank"><img alt='linkedin' src='https://img.shields.io/badge/Ganesh_Shrestha-100000?style=flat&logo=linkedin&logoColor=white&labelColor=0077b5&color=0077b5'/></a>
 <a href='https://github.com/ganeshrestha97' target="_blank"><img alt='GitHub' src='https://img.shields.io/badge/Ganesh_Shrestha-100000?style=flat&logo=GitHub&logoColor=white&labelColor=black&color=black'/></a>
-
-Paul Corpuz:
-<a href='https://www.linkedin.com/in/paulcorpuzseattle/' target="_blank"><img alt='LinkedIn' src='https://img.shields.io/badge/Paul_Corpuz-100000?style=flat&logo=LinkedIn&logoColor=white&labelColor=0077b5&color=0077b5'/></a>
-<a href='https://github.com/paulcorpuz/' target="_blank"><img alt='GitHub' src='https://img.shields.io/badge/Paul_Corpuz-100000?style=flat&logo=GitHub&logoColor=white&labelColor=black&color=000000'/></a>
 
 </div>
 
@@ -85,7 +85,7 @@ Page Two is developed using Python, Django, and PostgreSQL featuring Django Auth
 <img src="main_app/static/images/pg2mid2.png" alt="Page Two Mid Dev 2" height="auto" width="320">
 
 ### Deployed
-<img src="main_app/static/images/pg2banner.png" alt="Page Two Banner" height="auto" width="320">
+<img src="main_app/static/images/pgdeployed.png" alt="Page Two Banner" height="auto" width="320">
 
 
 🔧 Getting Started 
