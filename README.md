@@ -110,4 +110,4 @@ No installation required, however, internet access is necessary.
 
 ❤️ Acknowledgments
 ============
-- Special thank you to Seanna Arnold and Natalia Parra for contributing art to our project!
+Special thank you to Seanna Arnold, Natalia Parra, Eric Klimowich, Lisa Young, and Spirit Barnes for contributing art to our project!
